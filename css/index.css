@@ -1,0 +1,59 @@
+
+html {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans';
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5rem;
+}
+
+.employee_record {  
+  margin: 2rem;  
+  height: auto;
+  min-width: 10rem;
+  max-width: 20rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  grid-template: 1fr 1fr / 1fr  2fr;
+  
+  max-height: 100rem;
+  overflow: hidden;
+}
+
+.hours_input {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 75%;
+  justify-self: center;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.value {
+  padding-left: 1rem;
+  display: flex;
+  grid-column: 2;
+  align-items: center;
+  justify-self: center;
+  border-bottom: .1rem solid lightskyblue;
+}
+
+.identifier {
+  padding-left: 1rem;
+  display: flex;
+  
+  grid-column: 1;
+  justify-content: right;
+  align-items: center;
+  justify-self: right;
+  background-color: lightskyblue;
+}
