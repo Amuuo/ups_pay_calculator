@@ -29,10 +29,11 @@ class Employee {
 
 let employees = [
   new Employee('Adam Williams', 14.00), 
+  /*
   new Employee('Andrew Valderrama', 14.00),
   new Employee('Alex Maceido', 14.00),
   new Employee('Chris Ortiz', 14.00)
-  
+  */
 ];
 //adam.fullName = 'Adam Williams';
 //adam.payRate  = 14.00;
@@ -48,13 +49,13 @@ employee_records
 let d3_records = d3.select('body').selectAll('.employee_record');
 
 
-const setup_inputs = (employee_data) => {
+const setup_inputs = employee_data => {
   
   const add_input_button = employee_data => {
     employee_data
     .append('input')
     .attr('type', 'button')
-    .attr('class', 'input_button')
+    .attr('id', 'input_button')
     .attr('value', 'Enter');
   }
   const add_placeholder = (employee_data, text) => {
@@ -67,10 +68,9 @@ const setup_inputs = (employee_data) => {
   
   add_placeholder(employee_data, 'enter 1st shift hours');
   add_input_button(employee_data);
-  add_placeholder(employee_data, 'enter 2nd shift hours');
-  add_input_button(employee_data);
+  
 };
-const display_data = (employee_data) => {
+const display_data = employee_data => {
   
   const append_identifier = (employee_data, text) => {
     employee_data.append('div').attr('class', 'identifier').text(text);
@@ -87,25 +87,27 @@ const display_data = (employee_data) => {
   setup_inputs(employee_data);
 };
 const setup_click_event = employee_data => {
-  let button = d3.select('body').selectAll('.input_button');
+  let button = d3.select('body').select('#input_button');
   button
     .on('click', function() {    
       let inputs = document.getElementsByClassName('hours_input');
       console.log(inputs);
       for (let input of inputs) {
         console.log(input.value);    
+        if (input.value != 0) {
+          let element = document.querySelector('input');
+          let new_div = document.createElement('div');
+          new_div.setAttribute('class', 'hours_input')
+          new_div.innerHTML = `${input.value} hours`;
+          new_div.setAttribute('style', 'margin: 2rem 1rem 0 1rem');     
+          element.replaceWith(new_div);
+        }
       }
+      d3.select(this).remove();
       
       d3.select(this).attr('value', 'clicked');    
       console.log('clicked');
 
-      if (inputs[0] != null) {
-        let element = document.querySelector('input');
-        let new_div = document.createElement('div');
-        new_div.setAttribute('class', 'hours_input')
-        new_div.innerHTML = inputs[0].value;
-        element.replaceWith(new_div);
-      }
     });
 }
 
