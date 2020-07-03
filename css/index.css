@@ -17,6 +17,8 @@ body {
 
 .employee_record {  
   margin-bottom    : 2rem;      
+  padding-top      : 2rem;
+  padding-bottom   : 2rem;
   display          : grid;  
   background-color : aliceblue;
   grid-template    : 1fr 1fr / repeat(3, auto);  
@@ -29,11 +31,11 @@ body {
   place-self        : center;
   justify-self      : center;
   justify-content   : center;
-  grid-column-start : 1;
-  grid-column       : span 2;
-  width             : calc(100% - 3rem);  
+  grid-column       : 2;  
+  width             : auto;  
   /*grid-column-end   : 4;*/
 }
+
 
 .value {  
   height            : 2rem;

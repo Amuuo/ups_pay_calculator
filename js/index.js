@@ -25,13 +25,14 @@ class Employee {
   }
 };
 
+
+
 let employees = [
   new Employee('Adam Williams', 14.00), 
-  /*
   new Employee('Andrew Valderrama', 14.00),
   new Employee('Alex Maceido', 14.00),
   new Employee('Chris Ortiz', 14.00)
-  */
+  
 ];
 //adam.fullName = 'Adam Williams';
 //adam.payRate  = 14.00;
@@ -43,65 +44,73 @@ employee_records
   .append('div')
   .attr('class', 'employee_record');
 
-let records = d3.select('body').selectAll('.employee_record');
 
-records
-  .append('div')
-  .attr('class', 'identifier')  
-  .text('Name');
-
-records
-  .append('div')
-  .attr('class', 'value')
-  .text(d => d.fullName);
+let d3_records = d3.select('body').selectAll('.employee_record');
 
 
-records
-  .append('div')
-  .attr('class', 'identifier')
-  .text('Hourly Rate');
+const setup_inputs = (employee_data) => {
+  
+  const add_input_button = employee_data => {
+    employee_data
+    .append('input')
+    .attr('type', 'button')
+    .attr('class', 'input_button')
+    .attr('value', 'Enter');
+  }
+  const add_placeholder = (employee_data, text) => {
+    employee_data  
+    .append('input')
+    .attr('type', 'text')
+    .attr('class', 'hours_input')
+    .attr('placeholder', text);
+  }
+  
+  add_placeholder(employee_data, 'enter 1st shift hours');
+  add_input_button(employee_data);
+  add_placeholder(employee_data, 'enter 2nd shift hours');
+  add_input_button(employee_data);
+};
+const display_data = (employee_data) => {
+  
+  const append_identifier = (employee_data, text) => {
+    employee_data.append('div').attr('class', 'identifier').text(text);
+  }
 
-records
-  .append('div')
-  .attr('class', 'value')
-  .text(d => `$${d.payRate}.00`);
+  append_identifier(employee_data, 'Name');  
+  employee_data
+    .append('div').attr('class', 'value').text(d => d.fullName);
 
-records  
-.append('input')
-  .attr('type', 'text')
-  .attr('class', 'hours_input')
-  .attr('placeholder', 'enter 1st shift hours');
+  append_identifier(employee_data, 'Hourly Rate');  
+  employee_data
+    .append('div').attr('class', 'value').text(d => `$${d.payRate}.00`);
 
-records
-  .append('input')
-  .attr('type', 'button')
-  .attr('class', 'input_button')
-  .attr('value', 'Enter');
+  setup_inputs(employee_data);
+};
+const setup_click_event = employee_data => {
+  let button = d3.select('body').selectAll('.input_button');
+  button
+    .on('click', function() {    
+      let inputs = document.getElementsByClassName('hours_input');
+      console.log(inputs);
+      for (let input of inputs) {
+        console.log(input.value);    
+      }
+      
+      d3.select(this).attr('value', 'clicked');    
+      console.log('clicked');
 
-records
-  .append('input')
-  .attr('type', 'text')
-  .attr('class', 'hours_input')
-  .attr('placeholder', 'enter 2nd shift hours');
-
-records
-.append('input')
-.attr('type', 'button')
-.attr('class', 'input_button')
-.attr('value', 'Enter');
+      if (inputs[0] != null) {
+        let element = document.querySelector('input');
+        let new_div = document.createElement('div');
+        new_div.setAttribute('class', 'hours_input')
+        new_div.innerHTML = inputs[0].value;
+        element.replaceWith(new_div);
+      }
+    });
+}
 
 
-let button = d3.select('body').selectAll('.input_button');
-button
-  .on('click', function() {    
-    let inputs = document.getElementsByClassName('hours_input');
-    console.log(inputs);
-    for (let input of inputs) {
-      console.log(input.value);    
-    }
-    
-    d3.select(this).attr('value', 'clicked');    
-    console.log('clicked');
-  });
+display_data(d3_records);
+setup_click_event(d3_records)
 
-console.log(records);
+console.log(d3_records);
