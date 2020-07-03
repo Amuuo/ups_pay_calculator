@@ -27,9 +27,11 @@ class Employee {
 
 let employees = [
   new Employee('Adam Williams', 14.00), 
+  /*
   new Employee('Andrew Valderrama', 14.00),
   new Employee('Alex Maceido', 14.00),
   new Employee('Chris Ortiz', 14.00)
+  */
 ];
 //adam.fullName = 'Adam Williams';
 //adam.payRate  = 14.00;
@@ -39,40 +41,67 @@ employee_records
   .data(employees)
   .enter()
   .append('div')
-  .attr('class', 'employee_record')
-  .on('mouseover', function() {
-    d3.select(this).style('background-color', 'lightblue');
-  })
-  .on('mouseout', function() {
-    d3.select(this).style('background-color', 'aliceblue');
-  });
+  .attr('class', 'employee_record');
 
 let records = d3.select('body').selectAll('.employee_record');
 
 records
-  .append('p')
+  .append('div')
   .attr('class', 'identifier')  
-  .text('Name:');
+  .text('Name');
 
 records
-  .append('p')
+  .append('div')
   .attr('class', 'value')
   .text(d => d.fullName);
 
 
 records
-  .append('p')
+  .append('div')
   .attr('class', 'identifier')
-  .text('Pay Rate:');
+  .text('Hourly Rate');
 
 records
-  .append('p')
+  .append('div')
   .attr('class', 'value')
-  .text(d => `${d.payRate}.00/hr`);
+  .text(d => `$${d.payRate}.00`);
 
 records  
 .append('input')
   .attr('type', 'text')
   .attr('class', 'hours_input')
+  .attr('placeholder', 'enter 1st shift hours');
+
+records
+  .append('input')
+  .attr('type', 'button')
+  .attr('class', 'input_button')
+  .attr('value', 'Enter');
+
+records
+  .append('input')
+  .attr('type', 'text')
+  .attr('class', 'hours_input')
+  .attr('placeholder', 'enter 2nd shift hours');
+
+records
+.append('input')
+.attr('type', 'button')
+.attr('class', 'input_button')
+.attr('value', 'Enter');
 
 
+let button = d3.select('body').selectAll('.input_button');
+button
+  .on('click', function() {    
+    let inputs = document.getElementsByClassName('hours_input');
+    console.log(inputs);
+    for (let input of inputs) {
+      console.log(input.value);    
+    }
+    
+    d3.select(this).attr('value', 'clicked');    
+    console.log('clicked');
+  });
+
+console.log(records);
