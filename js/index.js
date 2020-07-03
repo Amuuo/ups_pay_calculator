@@ -90,19 +90,17 @@ const setup_click_event = employee_data => {
   let button = d3.select('body').select('#input_button');
   button
     .on('click', function() {    
-      let inputs = document.getElementsByClassName('hours_input');
-      console.log(inputs);
-      for (let input of inputs) {
-        console.log(input.value);    
-        if (input.value != 0) {
-          let element = document.querySelector('input');
-          let new_div = document.createElement('div');
-          new_div.setAttribute('class', 'hours_input')
-          new_div.innerHTML = `${input.value} hours`;
-          new_div.setAttribute('style', 'margin: 2rem 1rem 0 1rem');     
-          element.replaceWith(new_div);
-        }
+      let inputs = document.getElementsByClassName('hours_input');      
+      console.log(inputs[0].value);    
+      if (inputs[0].value != 0) {
+        let element = document.querySelector('input');
+        let new_div = document.createElement('div');
+        new_div.setAttribute('class', 'hours_input')
+        new_div.innerHTML = `${inputs[0].value} hours`;
+        new_div.setAttribute('style', 'margin: 2rem 1rem 0 1rem');     
+        element.replaceWith(new_div);
       }
+      
       d3.select(this).remove();
       
       d3.select(this).attr('value', 'clicked');    
