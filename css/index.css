@@ -22,12 +22,18 @@ body {
   margin          : 5rem 10rem 0 10rem;
 }
 
+#Checkboxes1 {
+  grid-area: a;
+  display: flex;
+  place-self: center;
+}
+
 .employee_record {    
 
   grid-area        : a;
   display          : grid;  
   background-color : aliceblue;
-  grid-template    : 1fr 1fr 2rem 1fr / repeat(3, auto);  
+  grid-template    : 1fr 1fr 2rem 1fr 1fr / repeat(3, auto);  
   border: .2rem solid lightskyblue
 }
 
