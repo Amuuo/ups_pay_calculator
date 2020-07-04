@@ -1,5 +1,9 @@
 
-html {
+@page { 
+  margin: auto;
+}
+
+html {  
   display         : flex;
   align-items     : center;
   justify-content : center;
@@ -8,41 +12,48 @@ html {
 
 body {
   display         : flex;
-  width           : auto;
+  width           : 100%;
+  min-width       : 315px;
+  max-width       : 550px;
+  height          : 100%;
   flex-direction  : column;
   align-items     : center;
   justify-content : center;
-  margin          : 5rem;
+  margin          : 5rem 10rem 0 10rem;
 }
 
-.employee_record {  
-  margin-bottom    : 2rem;        
-  padding-bottom   : 2rem;
+.employee_record {    
+
+  grid-area        : a;
   display          : grid;  
   background-color : aliceblue;
-  grid-template    : 1fr 1fr / repeat(3, auto);  
-  overflow         : hidden;
+  grid-template    : 1fr 1fr 2rem 1fr / repeat(3, auto);  
+  border: .2rem solid lightskyblue
+}
+
+.employee_record:hover {
+  box-shadow: 6px 3px 15px grey;
+  cursor: pointer;
 }
 
 .hours_input {
-  display           : flex;
-  margin-top            : 2rem;  
+  display           : flex;  
   height            : 2rem;  
+  margin            : .5rem;
   place-self        : center;
   align-items       : center;
   grid-column       : 2;  
-  grid-row          : 3;
-  width             : auto;  
+  grid-row          : 4;
+  width             : 100%;  
   /*grid-column-end   : 4;*/
 }
 
 
 .value {  
+  display           : flex;
+  grid-column       : 2 / 4;  
   height            : 2rem;
   padding           : 1rem; 
-  display           : flex;
-  grid-column-start : 2;
-  grid-column-end   : 4;
   align-items       : center;
   border-bottom     : .1rem solid lightskyblue;
 }
@@ -50,7 +61,7 @@ body {
 .identifier {
   
   height           : 2rem; 
-  width            : 7rem;  
+  width            : -webkit-fill-available;  
   padding          : 1rem;
   display          : flex;
   place-self       : center;
@@ -66,12 +77,37 @@ body {
 }
 
 #input_button {  
-  margin: 2rem 1rem 0 1rem;  
-  align-items     : center;
+  margin          : .5rem;
   grid-column     : 3;
-  grid-row        : 3;
-  place-self      : center;
-  justify-content : center;    
+  grid-row        : 4;
+  place-self      : center;  
   width           : 7rem;
   height          : 2rem;
+}
+
+main {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-row-gap: 2rem;
+  grid-template-areas: 'a'
+                       'b';
+}
+
+#pay_data {
+  height: 25rem;
+  width: 100%;
+  grid-area: b;
+  display: grid;
+  grid-template-areas: 'head head head'
+                       'reg_id reg_val reg_val'
+                       'ot_id ot_val ot_val';
+  background-color: lightskyblue;
+  border              : .2rem solid #DCDCDC;
+  overflow: visible;
+}
+
+#pay_data:hover {
+  box-shadow: 3px 3px 15px grey inset;
+  cursor: pointer;
 }

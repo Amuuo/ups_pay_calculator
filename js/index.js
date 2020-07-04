@@ -1,4 +1,26 @@
 
+class Pay_data {
+  
+  shifts         = 0;
+  regular_pay    = 0;
+  overtime_pay   = 0;
+  regular_hours  = 0;
+  overtime_horus = 0;
+  total_hours    = 0;
+  double         = false;
+
+constructor(shifts) {
+  
+  if(shift.length > 1)
+    double = true;
+  
+  for (let shift in shifts) {
+    total_hours += shift.end_time - shift.start_time;
+  }
+}
+};
+
+
 class Employee {
 
   _firstName = '';
@@ -38,7 +60,7 @@ let employees = [
 //adam.fullName = 'Adam Williams';
 //adam.payRate  = 14.00;
 
-let employee_records = d3.select('body').selectAll('div');
+let employee_records = d3.select('main').selectAll('div');
 employee_records
   .data(employees)
   .enter()
@@ -46,7 +68,7 @@ employee_records
   .attr('class', 'employee_record');
 
 
-let d3_records = d3.select('body').selectAll('.employee_record');
+let d3_records = d3.select('main').selectAll('.employee_record');
 
 
 const setup_inputs = employee_data => {
@@ -56,17 +78,19 @@ const setup_inputs = employee_data => {
     .append('input')
     .attr('type', 'button')
     .attr('id', 'input_button')
-    .attr('value', 'Enter');
+    .attr('value', 'Shift Start');
   }
   const add_placeholder = (employee_data, text) => {
     employee_data  
     .append('input')
-    .attr('type', 'text')
+    .attr('type', 'time')
     .attr('class', 'hours_input')
     .attr('placeholder', text);
   }
   
   add_placeholder(employee_data, 'enter 1st shift hours');
+  add_input_button(employee_data);
+  add_placeholder(employee_data, 'enter 2st shift hours');
   add_input_button(employee_data);
   
 };
@@ -97,20 +121,22 @@ const setup_click_event = employee_data => {
         let new_div = document.createElement('div');
         new_div.setAttribute('class', 'hours_input')
         new_div.innerHTML = `${inputs[0].value} hours`;
-        new_div.setAttribute('style', 'margin: 2rem 1rem 0 1rem');     
+        //new_div.setAttribute('style', 'margin: 2rem 1rem 0 1rem');     
         element.replaceWith(new_div);
-      }
-      
-      d3.select(this).remove();
-      
-      d3.select(this).attr('value', 'clicked');    
-      console.log('clicked');
-
+        d3.select(this).remove();
+      }      
     });
 }
 
 
 display_data(d3_records);
 setup_click_event(d3_records)
+
+let pay_data = d3.select('main');
+
+pay_data  
+  .append('div')
+  .attr('id', 'pay_data');
+
 
 console.log(d3_records);

@@ -7,7 +7,8 @@
   <body>    
     <header>
       <img id="logo" src="img/ups_logo.png">
-    </header>
-  </body>
+    </header>  
+    <main></main>
+  </body>  
 </html>
 <script src="js/index.js"></script>
