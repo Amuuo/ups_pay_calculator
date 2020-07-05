@@ -1,7 +1,4 @@
 
-@page { 
-  margin: auto;
-}
 
 html {  
   display         : flex;
@@ -23,14 +20,11 @@ body {
 }
 
 #Checkboxes1 {
-  grid-area: a;
-  display: flex;
-  place-self: center;
+  grid-area  : a;
+  display    : flex;
+  place-self : center;
 }
 
-#shift_submit_button {
-
-}
 
 .employee_record {    
   grid-area        : b;
@@ -46,33 +40,34 @@ body {
 }
 
 .shift_input_container {
-  width: 100%;
-  margin: 1rem 0 1rem 0;
+  width  : 100%;
+  margin : 1rem 0 1rem 0;
   
-  place-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  grid-column: span 3;
+  place-self      : center;
+  display         : flex;
+  flex-direction  : row;
+  justify-content : space-evenly;
+  grid-column     : span 3;
 }
 
 #shift_start_container, #shift_end_container {
-  font-size: .75em;
-  display           : flex;   
-  flex-direction: column;      
-  align-items: center;  
-  justify-content: center;
-  width             : 30%;  
-  height: 100%;  
+  font-size       : .75em;
+  display         : flex;   
+  flex-direction  : column;      
+  align-items     : center;  
+  justify-content : center;
+  width           : 30%;  
+  height          : 100%;  
 }
 
 #shift_submit_button {
-  width: 30%;
+  width : 30%;
 }
 
 .shift_input {
-  height: 1.5rem;
-  width: 100%;  
+  height : 1.5rem;
+  width  : 100%;  
+  font-size: 1.5rem;
 }
 
 
@@ -88,7 +83,8 @@ body {
 .identifier {
   
   height           : 2rem; 
-  width            : -webkit-fill-available;  
+  width            : -webkit-fill-available;
+  width            : -moz-available;
   padding          : 1rem;
   display          : flex;
   place-self       : center;

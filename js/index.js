@@ -1,3 +1,4 @@
+
 class Employee {
 
   _firstName = '';
@@ -40,7 +41,7 @@ $('document').ready(() => {
 
   
   $('#show_button').click(event => {    
-    $('.employee_record').slideToggle();
+    $('.employee_record').slideToggle(200);
     if ($(event.currentTarget).val() == 'Hide Employee Data'){
       $(event.currentTarget).val('Show Employee Data');      
     }
