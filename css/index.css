@@ -13,7 +13,7 @@ html {
 body {
   display         : flex;
   width           : 100%;
-  min-width       : 315px;
+  min-width       : 450px;
   max-width       : 550px;
   height          : 100%;
   flex-direction  : column;
@@ -28,12 +28,15 @@ body {
   place-self: center;
 }
 
-.employee_record {    
+#shift_submit_button {
 
+}
+
+.employee_record {    
   grid-area        : b;
   display          : grid;  
   background-color : aliceblue;
-  grid-template    : 1fr 1fr 2rem 1fr 1fr / repeat(3, auto);  
+  grid-template    : repeat(4, auto) / repeat(3, auto);  
   border           : .2rem solid lightskyblue
 }
 
@@ -42,16 +45,32 @@ body {
   cursor     : pointer;
 }
 
-.hours_input {
-  display           : flex;  
-  height            : 2rem;  
-  margin            : .5rem;
-  place-self        : center;
-  align-items       : center;
-  grid-column       : 2;  
-  grid-row          : 4;
+.shift_input_container {
+  width: 100%;
+  margin: 1rem 0 1rem 0;
+  
+  place-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  grid-column: span 3;
+}
+
+#shift_start_container, #shift_end_container {
+  font-size: .75em;
+  display           : flex;   
+  flex-direction: column;      
+  align-items: center;  
+  justify-content: center;
   width             : 100%;  
-  /*grid-column-end   : 4;*/
+  height: 100%;  
+}
+
+
+
+.shift_input {
+  height: 1.5rem;
+  width: 100%;
 }
 
 
@@ -119,7 +138,8 @@ main {
 }
 
 #show_button {
+  display: flex;  
   place-self: center;
   height: 2rem;
-  width: 50%;
+  width: auto;
 }

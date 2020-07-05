@@ -25,7 +25,6 @@ class Employee {
 };
 
 
-
 let employees = [
   new Employee('Adam Williams', 14.00), 
   /*
@@ -36,45 +35,17 @@ let employees = [
 ];
 
 
-const addIdentifier = ($employee_record, text) => {
-  $employee_record.append($('<div>').addClass('identifier').text(text));
-}
-const addValue = ($employee_record, text) => {
-  $employee_record.append($('<div>').addClass('value').text(text));
-}
-
 $('document').ready(() => {
-  
-  $('main').prepend($('<div>').attr('class', 'employee_record'));
-  let $employee_record = $('.employee_record');
+  $('#Checkboxes1').buttonset();  
 
-  addIdentifier ($employee_record, 'Name');  
-  addValue      ($employee_record, employees[0].fullName);
   
-  addIdentifier ($employee_record, 'Hourly Rate');
-  addValue      ($employee_record, employees[0].payRate);  
-  
-  $employee_record.hide();
-  
-  $('main').append($('<input>')
-    .attr('type', 'button')
-    .attr('id', 'show_button')
-    .attr('value', 'Show Employee Data'));
-  $('#show_button').click(function() {
-    $employee_record.slideToggle();
-  })
-  
-
-  $('input[type="checkbox"]').click(function() {
-    let $label1 = $('label[for="Checkbox1"]');
-    let $label2 = $('label[for="Checkbox2"]');
-    if($('#Checkbox1').prop('checked') == true) {
-      console.log(`${$label1.textContent} checked`);
-      $employee_record.slideToggle();
-      $('#show_button').text('Hide Employee Data');
+  $('#show_button').click(event => {    
+    $('.employee_record').slideToggle();
+    if ($(event.currentTarget).val() == 'Hide Employee Data'){
+      $(event.currentTarget).val('Show Employee Data');      
     }
     else {
-      console.log(`${$label2.textContent} unchecked`);
-    }
+      $(event.currentTarget).val('Hide Employee Data');
+    }    
   });
 });
