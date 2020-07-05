@@ -49,4 +49,17 @@ $('document').ready(() => {
       $(event.currentTarget).val('Hide Employee Data');
     }    
   });
+
+  $('#shift_submit_button').click(() => {
+    let shift_start = new Date();
+    let shift_time = shift_start.getTime();
+    shift_start.setTime($('#shift_start_input').val());
+    let shift_end   = new Date($('#shift_end_input').val());
+    console.log(shift_start.getTime());
+    console.log(shift_end);
+    console.log(shift_start.getHours());
+
+    console.log(shift_end-shift_start)
+
+  })
 });
