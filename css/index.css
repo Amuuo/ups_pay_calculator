@@ -30,7 +30,7 @@ body {
 
 .employee_record {    
 
-  grid-area        : a;
+  grid-area        : b;
   display          : grid;  
   background-color : aliceblue;
   grid-template    : 1fr 1fr 2rem 1fr 1fr / repeat(3, auto);  

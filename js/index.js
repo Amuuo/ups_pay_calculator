@@ -1,26 +1,3 @@
-
-class Pay_data {
-  
-  shifts         = 0;
-  regular_pay    = 0;
-  overtime_pay   = 0;
-  regular_hours  = 0;
-  overtime_horus = 0;
-  total_hours    = 0;
-  double         = false;
-
-constructor(shifts) {
-  
-  if(shift.length > 1)
-    double = true;
-  
-  for (let shift in shifts) {
-    total_hours += shift.end_time - shift.start_time;
-  }
-}
-};
-
-
 class Employee {
 
   _firstName = '';
@@ -57,86 +34,25 @@ let employees = [
   new Employee('Chris Ortiz', 14.00)
   */
 ];
-//adam.fullName = 'Adam Williams';
-//adam.payRate  = 14.00;
-
-let employee_records = d3.select('main').selectAll('div');
-employee_records
-  .data(employees)
-  .enter()
-  .append('div')
-  .attr('class', 'employee_record');
 
 
-let d3_records = d3.select('main').selectAll('.employee_record');
+$('document').ready(() => {
 
+  let $main = $('main');  
+  $main.prepend($('<div>').attr('class', 'employee_record'));
+  let $employee_record = $('.employee_record');
+  $employee_record.append($('<div>').attr('class', 'identifier').text('Name'));
+  $employee_record.append($('<div>').attr('class', 'value').text(employees[0].fullName));
+  $employee_record.append($('<div>').attr('class', 'identifier').text('Hourly Rate'));
+  $employee_record.append($('<div>').attr('class', 'value').text(`$${employees[0].payRate}.00`));
 
-const setup_inputs = employee_data => {
-  
-  const add_input_button = employee_data => {
-    employee_data
-    .append('input')
-    .attr('type', 'button')
-    .attr('id', 'input_button')
-    .attr('value', 'Shift Start');
-  }
-  const add_placeholder = (employee_data, text) => {
-    employee_data  
-    .append('input')
-    .attr('type', 'time')
-    .attr('class', 'hours_input')
-    .attr('placeholder', text);
-  }
-  
-  add_placeholder(employee_data, 'enter 1st shift hours');
-  add_input_button(employee_data);
-  add_placeholder(employee_data, 'enter 2st shift hours');
-  add_input_button(employee_data);
-  
-};
-const display_data = employee_data => {
-  
-  const append_identifier = (employee_data, text) => {
-    employee_data.append('div').attr('class', 'identifier').text(text);
-  }
-
-  append_identifier(employee_data, 'Name');  
-  employee_data
-    .append('div').attr('class', 'value').text(d => d.fullName);
-
-  append_identifier(employee_data, 'Hourly Rate');  
-  employee_data
-    .append('div').attr('class', 'value').text(d => `$${d.payRate}.00`);
-
-  setup_inputs(employee_data);
-};
-const setup_click_event = employee_data => {
-  let button = d3.select('body').select('#input_button');
-  button
-    .on('click', function() {    
-      let inputs = document.getElementsByClassName('hours_input');      
-      console.log(inputs[0].value);    
-      if (inputs[0].value != 0) {
-        let element = document.querySelector('input');
-        let new_div = document.createElement('div');
-        new_div.setAttribute('class', 'hours_input')
-        new_div.innerHTML = `${inputs[0].value} hours`;
-        //new_div.setAttribute('style', 'margin: 2rem 1rem 0 1rem');     
-        element.replaceWith(new_div);
-        d3.select(this).remove();
-      }      
-    });
-}
-
-
-display_data(d3_records);
-setup_click_event(d3_records)
-
-let pay_data = d3.select('main');
-
-pay_data  
-  .append('div')
-  .attr('id', 'pay_data');
-
-
-console.log(d3_records);
+  $('input[type="checkbox"]').click(function() {
+    let $this = $(this);
+    if($this.prop('checked') == true) {
+      console.log(`${$this[0].text()} checked`);
+    }
+    else {
+      console.log(`${$this[0].text()} unchecked`);
+    }
+  });
+});
