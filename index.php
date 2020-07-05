@@ -34,7 +34,7 @@
             <label for="shift_end_input">Shift End<br></label>
             <input id="shift_end_input" class="shift_input" type="time" ></input>
           </div>
-          <input id="shift_submit_button" type="button" value="Enter"></input>
+          <input id="shift_submit_button" type="button" value="Submit"></input>
         </div>
     </div>
       <input type="button" id="show_button" value="Hide Employee Data"></input>
