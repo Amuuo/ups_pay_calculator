@@ -34,12 +34,12 @@ body {
   display          : grid;  
   background-color : aliceblue;
   grid-template    : 1fr 1fr 2rem 1fr 1fr / repeat(3, auto);  
-  border: .2rem solid lightskyblue
+  border           : .2rem solid lightskyblue
 }
 
 .employee_record:hover {
-  box-shadow: 6px 3px 15px grey;
-  cursor: pointer;
+  box-shadow : 6px 3px 15px grey;
+  cursor     : pointer;
 }
 
 .hours_input {
@@ -116,4 +116,10 @@ main {
 #pay_data:hover {
   box-shadow: 3px 3px 15px grey inset;
   cursor: pointer;
+}
+
+#show_button {
+  place-self: center;
+  height: 2rem;
+  width: 50%;
 }

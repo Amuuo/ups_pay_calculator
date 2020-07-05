@@ -36,23 +36,45 @@ let employees = [
 ];
 
 
-$('document').ready(() => {
+const addIdentifier = ($employee_record, text) => {
+  $employee_record.append($('<div>').addClass('identifier').text(text));
+}
+const addValue = ($employee_record, text) => {
+  $employee_record.append($('<div>').addClass('value').text(text));
+}
 
-  let $main = $('main');  
-  $main.prepend($('<div>').attr('class', 'employee_record'));
+$('document').ready(() => {
+  
+  $('main').prepend($('<div>').attr('class', 'employee_record'));
   let $employee_record = $('.employee_record');
-  $employee_record.append($('<div>').attr('class', 'identifier').text('Name'));
-  $employee_record.append($('<div>').attr('class', 'value').text(employees[0].fullName));
-  $employee_record.append($('<div>').attr('class', 'identifier').text('Hourly Rate'));
-  $employee_record.append($('<div>').attr('class', 'value').text(`$${employees[0].payRate}.00`));
+
+  addIdentifier ($employee_record, 'Name');  
+  addValue      ($employee_record, employees[0].fullName);
+  
+  addIdentifier ($employee_record, 'Hourly Rate');
+  addValue      ($employee_record, employees[0].payRate);  
+  
+  $employee_record.hide();
+  
+  $('main').append($('<input>')
+    .attr('type', 'button')
+    .attr('id', 'show_button')
+    .attr('value', 'Show Employee Data'));
+  $('#show_button').click(function() {
+    $employee_record.slideToggle();
+  })
+  
 
   $('input[type="checkbox"]').click(function() {
-    let $this = $(this);
-    if($this.prop('checked') == true) {
-      console.log(`${$this[0].text()} checked`);
+    let $label1 = $('label[for="Checkbox1"]');
+    let $label2 = $('label[for="Checkbox2"]');
+    if($('#Checkbox1').prop('checked') == true) {
+      console.log(`${$label1.textContent} checked`);
+      $employee_record.slideToggle();
+      $('#show_button').text('Hide Employee Data');
     }
     else {
-      console.log(`${$this[0].text()} unchecked`);
+      console.log(`${$label2.textContent} unchecked`);
     }
   });
 });
