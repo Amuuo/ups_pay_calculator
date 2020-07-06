@@ -35,6 +35,29 @@ let employees = [
   */
 ];
 
+const convertToHours = shift_hours => {
+  console.log(`Start hour: ${shift_hours['start'][0]}`);
+  console.log(`End hour: ${shift_hours['end'][0]}`);
+
+  let total_hours = 0.0;
+  
+  let start_hour = parseFloat(shift_hours['start'][0]) + 
+                  (parseFloat(shift_hours['start'][1])/60);
+  let end_hour   = parseFloat(shift_hours['end'][0]) + 
+                  (parseFloat(shift_hours['end'][1])/60)
+
+  
+  if (end_hour > start_hour)
+    total_hours = end_hour - start_hour  
+  else if (start_hour > end_hour)
+    total_hours = (end_hour + 24) - start_hour;  
+  else if (start_hour == end_hour)
+    alert('Start time cannot equal end time');  
+  
+  console.log(`Total hours: ${total_hours}`);
+  
+}
+
 
 $('document').ready(() => {
   $('#Checkboxes1').buttonset();  
@@ -51,15 +74,11 @@ $('document').ready(() => {
   });
 
   $('#shift_submit_button').click(() => {
-    let shift_start = new Date();
-    let shift_time = shift_start.getTime();
-    shift_start.setTime($('#shift_start_input').val());
-    let shift_end   = new Date($('#shift_end_input').val());
-    console.log(shift_start.getTime());
-    console.log(shift_end);
-    console.log(shift_start.getHours());
+    
+    let shift_start_hours = $('#shift_start_input').val().split(':');
+    let shift_end_hours   = $('#shift_end_input').val().split(':');    
 
-    console.log(shift_end-shift_start)
-
+    convertToHours({'start': shift_start_hours, 'end': shift_end_hours });
+    
   })
 });
