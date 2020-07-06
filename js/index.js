@@ -4,11 +4,22 @@ class Employee {
   _firstName = '';
   _lastName  = '';
   _payRate   = 0;
-  worK_history = []  
+  work_history = []  
   
   constructor(fullName, payRate) {
     this.fullName = fullName;
     this.payRate  = payRate;
+  }
+
+  insertWorkday(workday) {
+    workday.regular_pay  = workday.regular_hours * this._payRate;
+    workday.overtime_pay = workday.overtime_hours * (this._payRate * 1.5);
+    workday.total_pay    = workday.regular_pay + workday.overtime_pay;
+
+    this.work_history.push(workday);
+
+    console.log('Workday inserted: ');
+    this.work_history[this.work_history.length - 1].displayWorkday();
   }
 
   set firstName(fName) { this._firstName = fName; }
@@ -27,8 +38,9 @@ class Employee {
 };
 
 
-class DayPay {
+class Workday {
   
+
   total_hours    = 0.0
   regular_hours  = 0.0;
   overtime_hours = 0.0;
@@ -52,9 +64,58 @@ class DayPay {
       }
     }
     else if (shifts.length == 1) {
-
-      this.total_hours 
+      this.total_hours = shifts[0].total_hours;
+      if (this.total_hours >= 5) {
+        this.overtime_hours = this.total_hours - 5;
+        this.regular_hours = 5;
+      }
+      else if (this.total_hours < 5) {
+        this.overtime_hours = 0;
+        this.regular_hours = this.total_hours;
+      }
     }
+  }
+
+  displayWorkday() {
+    console.log(`Total hours: ${this.total_hours}`);
+    console.log(`Regular hours: ${this.regular_hours}`);
+    console.log(`Overtime hours: ${this.overtime_hours}`);
+  }
+
+  renderWorkdayPayData() {
+    
+    $('#pay_data')                  
+      .append(
+        $('<p>')
+        .css('grid-area', 'reg_hours')
+        .text(employees[0].work_history[0].regular_hours.toFixed(2))
+      )
+      .append(
+        $('<p>')
+        .css('grid-area', 'reg_pay')
+        .text(`$${employees[0].work_history[0].regular_pay.toFixed(2)}`)
+      )
+      .append(
+        $('<p>')
+        .css('grid-area', 'ot_hours')
+        .text(employees[0].work_history[0].overtime_hours.toFixed(2))
+      )
+      .append(
+        $('<p>')
+        .css('grid-area', 'ot_pay')
+        .text(`$${employees[0].work_history[0].overtime_pay.toFixed(2)}`)
+      )
+      .append(
+        $('<p>')
+        .css('grid-area', 'tot_hours')
+        .text(employees[0].work_history[0].total_hours.toFixed(2))
+      )
+      .append(
+        $('<p>')
+        .css('grid-area', 'tot_pay')
+        .text(`$${employees[0].work_history[0].total_pay}`)
+      )
+
   }
 }
 
@@ -115,9 +176,8 @@ $('document').ready(() => {
       'start': $('#shift_start_input').val(), 
       'end'  : $('#shift_end_input')  .val()
     });
-    employees[0].shifts.push(first_shift);
-    $('#pay_data')            
-      .append($('<p>').css('grid-area', 'hours').text(employees[0].shifts[0].total_hours.toFixed(2)))
+    employees[0].insertWorkday(new Workday([first_shift]));
+    employees[0].work_history[0].renderWorkdayPayData();
       
 
     

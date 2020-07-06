@@ -119,28 +119,27 @@ main {
 }
 
 #pay_data {  
-  font-size: 0.75em;
+  padding: 1rem;
   height: auto;
-  width: 100%;
+  width: auto;
   grid-area: c;
   display: grid;
   grid-template-areas: 'id     hours     pay'
                        'reg_id reg_hours reg_pay'
-                       'ot_id  ot_hours  ot_pay';
+                       'ot_id  ot_hours  ot_pay'
+                       'tot_id tot_hours tot_pay';
   background-color: lightskyblue;
   border              : .2rem solid #DCDCDC;
   overflow: visible;
 }
 
-#pay_data p {
+#pay_data > p {
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: right;
   align-items: center;
-}
-
-#pay_data:hover {
-  box-shadow: 3px 3px 15px grey inset;
-  cursor: pointer;
+  border-left : .1rem solid black;
 }
 
 #show_button {

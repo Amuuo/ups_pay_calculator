@@ -24,7 +24,7 @@
         <div class="identifier">Name</div>
           <div class="value">Adam Williams</div>
         <div class="identifier">Hourly Rate</div>
-          <div class="value">$14.00</div>
+          <div class="value">$14.00</div> 
         <div class="shift_input_container">
           <div id="shift_start_container">
             <label for="shift_start_input">Shift Start</label>
@@ -38,9 +38,11 @@
         </div>
       </div>
     <div id="pay_data">
-      <p style="grid-area: id">Total Hours</p>
-      <p style="grid-area: reg_id">Regular Hours</p>
-      <p style="grid-area: ot_id">Overtime Hours</p>
+      <p style="grid-area: hours">Hours</p>
+      <p style="grid-area: pay">Pay</p>
+      <p style="grid-area: tot_id">Total</p>
+      <p style="grid-area: reg_id">Regular</p>
+      <p style="grid-area: ot_id">Overtime</p>
     </div>      
     </main>
 
