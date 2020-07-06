@@ -114,20 +114,28 @@ main {
   display: grid;
   grid-row-gap: 2rem;
   grid-template-areas: 'a'
-                       'b';
+                       'b' 
+                       'c';
 }
 
-#pay_data {
-  height: 25rem;
+#pay_data {  
+  font-size: 0.75em;
+  height: auto;
   width: 100%;
-  grid-area: b;
+  grid-area: c;
   display: grid;
-  grid-template-areas: 'head head head'
-                       'reg_id reg_val reg_val'
-                       'ot_id ot_val ot_val';
+  grid-template-areas: 'id     hours     pay'
+                       'reg_id reg_hours reg_pay'
+                       'ot_id  ot_hours  ot_pay';
   background-color: lightskyblue;
   border              : .2rem solid #DCDCDC;
   overflow: visible;
+}
+
+#pay_data p {
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 #pay_data:hover {

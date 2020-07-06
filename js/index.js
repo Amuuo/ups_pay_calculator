@@ -4,6 +4,7 @@ class Employee {
   _firstName = '';
   _lastName  = '';
   _payRate   = 0;
+  worK_history = []  
   
   constructor(fullName, payRate) {
     this.fullName = fullName;
@@ -26,6 +27,66 @@ class Employee {
 };
 
 
+class DayPay {
+  
+  total_hours    = 0.0
+  regular_hours  = 0.0;
+  overtime_hours = 0.0;
+  regular_pay    = 0.0;
+  overtime_pay   = 0.0;
+  total_pay      = 0.0;
+
+  constructor(shifts) {
+    
+    if (shifts.length > 1) {
+    
+      this.total_hours = shifts[0].total_hours + shifts[1].total_hours;
+      
+      if (this.total_hours > 8){
+        this.overtime_hours = this.total_hours - 8;
+        this.regular_hours = 8;
+      }
+      else {
+        this.overtime_hours = 0;
+        this.regular_hours = this.total_hours;
+      }
+    }
+    else if (shifts.length == 1) {
+
+      this.total_hours 
+    }
+  }
+}
+
+
+class Shift {
+  
+  total_hours = 0.0;
+  shift_start = '';
+  shift_end   = '';
+  
+  constructor(shift_hours) {
+
+    this.shift_start = shift_hours['start'];
+    this.shift_end   = shift_hours['end'];
+
+    let start_time = shift_hours['start'].split(':');
+    let end_time   = shift_hours['end']  .split(':');
+    
+    let start_hour = parseFloat(start_time[0]) + (parseFloat(start_time[1])/60);
+    let end_hour   = parseFloat(end_time[0])   + (parseFloat(end_time[1])/60);
+    
+    if (end_hour > start_hour)
+      this.total_hours = end_hour - start_hour  
+    else if (start_hour > end_hour)
+      this.total_hours = (end_hour + 24) - start_hour;  
+    else if (start_hour == end_hour)
+      alert('Start time cannot equal end time');  
+
+    console.log(`From constructor:\nTotal hours: ${this.total_hours}`);
+  }  
+}
+
 let employees = [
   new Employee('Adam Williams', 14.00), 
   /*
@@ -35,50 +96,33 @@ let employees = [
   */
 ];
 
-const convertToHours = shift_hours => {
-  console.log(`Start hour: ${shift_hours['start'][0]}`);
-  console.log(`End hour: ${shift_hours['end'][0]}`);
 
-  let total_hours = 0.0;
-  
-  let start_hour = parseFloat(shift_hours['start'][0]) + 
-                  (parseFloat(shift_hours['start'][1])/60);
-  let end_hour   = parseFloat(shift_hours['end'][0]) + 
-                  (parseFloat(shift_hours['end'][1])/60)
+const calculatePayForWorkday = shifts => {
+  if (shifts.length > 1) {
 
-  
-  if (end_hour > start_hour)
-    total_hours = end_hour - start_hour  
-  else if (start_hour > end_hour)
-    total_hours = (end_hour + 24) - start_hour;  
-  else if (start_hour == end_hour)
-    alert('Start time cannot equal end time');  
-  
-  console.log(`Total hours: ${total_hours}`);
-  
+  }
 }
 
 
 $('document').ready(() => {
+ 
   $('#Checkboxes1').buttonset();  
 
-  
-  $('#show_button').click(event => {    
-    $('.employee_record').slideToggle(200);
-    if ($(event.currentTarget).val() == 'Hide Employee Data'){
-      $(event.currentTarget).val('Show Employee Data');      
-    }
-    else {
-      $(event.currentTarget).val('Hide Employee Data');
-    }    
-  });
+  $('#pay_data').hide();
 
   $('#shift_submit_button').click(() => {
-    
-    let shift_start_hours = $('#shift_start_input').val().split(':');
-    let shift_end_hours   = $('#shift_end_input').val().split(':');    
+    let first_shift = new Shift({
+      'start': $('#shift_start_input').val(), 
+      'end'  : $('#shift_end_input')  .val()
+    });
+    employees[0].shifts.push(first_shift);
+    $('#pay_data')            
+      .append($('<p>').css('grid-area', 'hours').text(employees[0].shifts[0].total_hours.toFixed(2)))
+      
 
-    convertToHours({'start': shift_start_hours, 'end': shift_end_hours });
     
+    $('#pay_data').show(200);
   })
+  console.log(employees[0].shifts);
+
 });

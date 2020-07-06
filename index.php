@@ -36,8 +36,12 @@
           </div>
           <input id="shift_submit_button" type="button" value="Submit Shift"></input>
         </div>
-    </div>
-      <input type="button" id="show_button" value="Hide Employee Data"></input>
+      </div>
+    <div id="pay_data">
+      <p style="grid-area: id">Total Hours</p>
+      <p style="grid-area: reg_id">Regular Hours</p>
+      <p style="grid-area: ot_id">Overtime Hours</p>
+    </div>      
     </main>
 
   </body>  
