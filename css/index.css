@@ -119,11 +119,13 @@ main {
 }
 
 #pay_data {  
-  padding: 1rem;
+  padding: 1rem 2rem 1rem 2rem;
+  color: whitesmoke;
   height: auto;
   width: auto;
+  align-items: center;
   grid-area: c;
-  display: grid;
+  display: grid;  
   grid-template-areas: 'id     hours     pay'
                        'reg_id reg_hours reg_pay'
                        'ot_id  ot_hours  ot_pay'
@@ -133,13 +135,16 @@ main {
   overflow: visible;
 }
 
+
+
 #pay_data > p {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
-  border-left : .1rem solid black;
+  text-align: center;
+  border-bottom : .1rem solid whitesmoke;
 }
 
 #show_button {

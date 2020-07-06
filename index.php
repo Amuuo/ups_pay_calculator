@@ -39,7 +39,7 @@
       </div>
     <div id="pay_data">
       <p style="grid-area: hours">Hours</p>
-      <p style="grid-area: pay">Pay</p>
+      <p style="grid-area: pay">Earnings</p>
       <p style="grid-area: tot_id">Total</p>
       <p style="grid-area: reg_id">Regular</p>
       <p style="grid-area: ot_id">Overtime</p>

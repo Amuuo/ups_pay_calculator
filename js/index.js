@@ -3,7 +3,7 @@ class Employee {
 
   _firstName = '';
   _lastName  = '';
-  _payRate   = 0;
+  _payRate   = 0.0;
   work_history = []  
   
   constructor(fullName, payRate) {
@@ -113,7 +113,7 @@ class Workday {
       .append(
         $('<p>')
         .css('grid-area', 'tot_pay')
-        .text(`$${employees[0].work_history[0].total_pay}`)
+        .text(`$${employees[0].work_history[0].total_pay.toFixed(2)}`)
       )
 
   }
