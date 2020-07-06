@@ -22,30 +22,35 @@
       </div>
       <div class="employee_record">
         <div class="identifier">Name</div>
-          <div class="value">Adam Williams</div>
+        <div class="value">Adam Williams</div>
         <div class="identifier">Hourly Rate</div>
-          <div class="value">$14.00</div> 
+        <div class="value">$14.00</div> 
         <div class="shift_input_container">
-          <div id="shift_start_container">
+          <div class="shift_start_container">
             <label for="shift_start_input">Shift Start</label>
             <input id="shift_start_input" class="shift_input" type="time"></input>
           </div>
-          <div id="shift_end_container">
+          <div class="shift_end_container">
             <label for="shift_end_input">Shift End<br></label>
             <input id="shift_end_input" class="shift_input" type="time" ></input>
           </div>
-          <input id="shift_submit_button" type="button" value="Submit Shift"></input>
+          <input class="shift_submit_button" type="button" value="Submit Shift"></input>
         </div>
       </div>
-    <div id="pay_data">
-      <p style="grid-area: hours">Hours</p>
-      <p style="grid-area: pay">Earnings</p>
-      <p style="grid-area: tot_id">Total</p>
-      <p style="grid-area: reg_id">Regular</p>
-      <p style="grid-area: ot_id">Overtime</p>
-    </div>      
+      <div id="pay_data">
+        <p style="grid-area: hours">Hours</p>
+        <p style="grid-area: pay">Earnings</p>
+        <p style="grid-area: tot_id">Total</p>
+        <p style="grid-area: reg_id">Regular</p>
+        <p style="grid-area: ot_id">Overtime</p>
+        <p id="reg_hours" style="grid-area: reg_hours"></p>
+        <p id="reg_pay"   style="grid-area: reg_pay"></p>
+        <p id="ot_hours"  style="grid-area: ot_hours"></p>
+        <p id="ot_pay"    style="grid-area: ot_pay"></p>
+        <p id="tot_hours" style="grid-area: tot_hours"></p>
+        <p id="tot_pay"   style="grid-area: tot_pay"></p>
+      </div>      
     </main>
-
   </body>  
 <script src="js/index.js"></script>
 </html>

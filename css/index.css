@@ -50,24 +50,24 @@ body {
   grid-column     : span 3;
 }
 
-#shift_start_container, #shift_end_container {
+.shift_start_container, .shift_end_container {
   font-size       : .75em;
   display         : flex;   
   flex-direction  : column;      
   align-items     : center;  
   justify-content : center;
-  width           : 30%;  
+  width           : 25%;  
   height          : 100%;  
 }
 
-#shift_submit_button {
+.shift_submit_button {
   width : 30%;
 }
 
 .shift_input {
   height : 1.5rem;
   width  : 100%;  
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 
@@ -99,20 +99,12 @@ body {
   margin-bottom : 2rem;
 }
 
-#input_button {  
-  margin          : .5rem;
-  grid-column     : 3;
-  grid-row        : 4;
-  place-self      : center;  
-  width           : 7rem;
-  height          : 2rem;
-}
 
 main {
   width: 100%;
   height: auto;
   display: grid;
-  grid-row-gap: 2rem;
+  grid-row-gap: 3rem;
   grid-template-areas: 'a'
                        'b' 
                        'c';
@@ -145,11 +137,4 @@ main {
   align-items: center;
   text-align: center;
   border-bottom : .1rem solid whitesmoke;
-}
-
-#show_button {
-  display: flex;  
-  place-self: center;
-  height: 2rem;
-  width: auto;
 }
