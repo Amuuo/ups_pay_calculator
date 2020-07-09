@@ -172,8 +172,15 @@ $('document').ready(() => {
     
     $('#pay_data').show(200);    
     //$('.shift_input_container').hide(200);
-    $('#shift_start_input').val(0);
-    $('#shift_end_input').val(0);
+
+    $('#shift_start_input').replaceWith($('<div>').text(`${employees[0].work_history[0].shifts[0].shift_start}`));
+    $('#shift_end_input').replaceWith($('<div>').text(`${employees[0].work_history[0].shifts[0].shift_end}`));
+    $('.shift_input_container').prepend($('<div>').addClass('shift_start_container').text('Shift 1: '));
+    $('label[for="shift_start_input"]').text('Start');
+    $('label[for="shift_end_input"]').text('End');
+    $('.shift_submit_button').remove();
+    $('.employee_record').append($('<div>').attr('id', 'second_shift_button').text('+ Add Double Shift'));
+    $('.shift_input_container').css('justify-content', 'center');
   })
   
   console.log(employees[0].shifts);

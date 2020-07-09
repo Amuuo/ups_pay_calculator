@@ -34,15 +34,10 @@ body {
   border           : .2rem solid lightskyblue
 }
 
-.employee_record:hover {
-  box-shadow : 6px 3px 15px grey;
-  cursor     : pointer;
-}
 
 .shift_input_container {
   width  : 100%;
   margin : 1rem 0 1rem 0;
-  
   place-self      : center;
   display         : flex;
   flex-direction  : row;
@@ -55,6 +50,7 @@ body {
   display         : flex;   
   flex-direction  : column;      
   align-items     : center;  
+  place-self      : center;
   justify-content : center;
   width           : 25%;  
   height          : 100%;  
@@ -68,6 +64,23 @@ body {
   height : 1.5rem;
   width  : 100%;  
   font-size: 1.25rem;
+}
+
+#second_shift_button {
+  display          : flex;
+  align-items      : center;
+  justify-content  : center;  
+  height           : 2rem;
+  width            : 100%;  
+  font-style       : italic;
+  color            : whitesmoke;
+  background-color : lightskyblue;
+  grid-column      : span 3;
+}
+
+#second_shift_button:hover {
+  background-color : lightslategray;
+  cursor           : pointer;
 }
 
 
@@ -125,6 +138,7 @@ main {
   background-color: lightskyblue;
   border              : .2rem solid #DCDCDC;
   overflow: visible;
+  /*box-shadow: .25rem 0 .5rem rgba(25, 25, 25, 0.5) inset;*/
 }
 
 
@@ -136,5 +150,5 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-bottom : .1rem solid whitesmoke;
+  
 }
