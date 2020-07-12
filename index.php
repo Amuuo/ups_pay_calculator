@@ -49,7 +49,33 @@
         <p id="ot_pay"    style="grid-area: ot_pay"></p>
         <p id="tot_hours" style="grid-area: tot_hours"></p>
         <p id="tot_pay"   style="grid-area: tot_pay"></p>
-      </div>      
+      </div>
+      <?php 
+        $conn = new mysqli("localhost", "root", "", "ups");
+        
+        if($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+        echo "<p>Connected successfully</p>";        
+        
+        if(!($results = $conn->query("SELECT * FROM employee"))){                          
+          echo "Could not receive the results of query";
+        }
+
+        echo "<table align=\"center\">";
+        echo "<thead><td>ID</td><td>First Name</td><td>Last Name</td>";
+        echo "<td>Pay Rate</td></thead>";
+        
+        for($i = 0; $i < $results->num_rows; $i++){
+          echo "<tr>";
+          $row = $results->fetch_assoc();
+          $format_pay_rate = number_format($row["pay_rate"], 2);
+          echo "<td align=\"center\">{$row["id"]}</td><td>{$row["first_name"]}</td>";
+          echo "<td>{$row["last_name"]}</td><td>\${$format_pay_rate}</td>";
+          echo "</tr>";
+        }
+        echo "</table>";
+      ?>   
     </main>
   </body>  
 <script src="js/index.js"></script>

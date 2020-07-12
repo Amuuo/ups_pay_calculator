@@ -152,3 +152,30 @@ main {
   text-align: center;
   
 }
+
+table {
+  width: 100%;
+}
+
+thead td {  
+  justify-content: center;
+  text-align: center;
+}
+
+tbody tr:hover {
+  background-color: skyblue;
+}
+
+thead {
+  font-weight: bold;
+}
+
+
+table, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0 1rem 0 1rem;
+}
