@@ -9,11 +9,12 @@
     <script src="jQueryAssets/jquery.ui-1.10.4.button.min.js"></script>
   </head>
   <body>
+    <a href="./register.php">Register</a>
     <header>
       <img id="logo" src="img/ups_logo.png">
     </header>  
     <main>
-
+      
       <div id="Checkboxes1">
         <input type="checkbox" id="Checkbox1">
         <label for="Checkbox1">Hourly</label>
@@ -51,12 +52,36 @@
         <p id="tot_pay"   style="grid-area: tot_pay"></p>
       </div>
       <?php 
+        
         $conn = new mysqli("localhost", "root", "", "ups");
+        
+        function addTblCell(&$data) {
+          echo "<td>$data</td>";
+        }
+        
+        
+        function addTablerHeaderRow(&$row, $tbl_name) {
+          $results = $conn->query("SHOW COLUMNS FROM $tbl_name");          
+          echo "<thead><tr>";
+          while ($row = mysqli_fetch_array($results)) {
+            addTblCell($row['Field']);
+          }
+          echo "</tr></thead>";
+        }
+
+        function addTableRow($row) {
+
+          for ($i = 0; $i < $row.length; $i++) {
+            echo "<td>$row[$i]</td>";
+          }
+        }
+        
         
         if($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
         }
-        echo "<p>Connected successfully</p>";        
+        echo "<p align=\"center\" style=\"color: green\">";
+        echo "<strong>Connected successfully<strong></p>";        
         
         if(!($results = $conn->query("SELECT * FROM employee"))){                          
           echo "Could not receive the results of query";
@@ -66,12 +91,11 @@
         echo "<thead><td>ID</td><td>First Name</td><td>Last Name</td>";
         echo "<td>Pay Rate</td></thead>";
         
-        for($i = 0; $i < $results->num_rows; $i++){
-          echo "<tr>";
-          $row = $results->fetch_assoc();
+        while($row = $results->fetch_assoc()) {
+          echo "<tr>";          
           $format_pay_rate = number_format($row["pay_rate"], 2);
           echo "<td align=\"center\">{$row["id"]}</td><td>{$row["first_name"]}</td>";
-          echo "<td>{$row["last_name"]}</td><td>\${$format_pay_rate}</td>";
+          echo "<td>{$row["last_name"]}</td><td id=\"pay\">\${$format_pay_rate}</td>";
           echo "</tr>";
         }
         echo "</table>";

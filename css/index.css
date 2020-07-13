@@ -7,11 +7,20 @@ html {
   font-family     : 'Open Sans';
 }
 
+a {
+  position: static;
+  /*
+  top: 1rem;
+  right: 1rem;
+  */
+  
+}
+
 body {
   display         : flex;
   width           : 100%;
   min-width       : 450px;
-  max-width       : 550px;
+  max-width       : 600px;
   height          : 100%;
   flex-direction  : column;
   align-items     : center;
@@ -36,8 +45,8 @@ body {
 
 
 .shift_input_container {
-  width  : 100%;
-  margin : 1rem 0 1rem 0;
+  width           : 100%;
+  margin          : 1rem 0 1rem 0;
   place-self      : center;
   display         : flex;
   flex-direction  : row;
@@ -61,9 +70,9 @@ body {
 }
 
 .shift_input {
-  height : 1.5rem;
-  width  : 100%;  
-  font-size: 1.25rem;
+  height    : 1.5rem;
+  width     : 100%;  
+  font-size : 1.25rem;
 }
 
 #second_shift_button {
@@ -114,31 +123,31 @@ body {
 
 
 main {
-  width: 100%;
-  height: auto;
-  display: grid;
-  grid-row-gap: 3rem;
-  grid-template-areas: 'a'
-                       'b' 
-                       'c';
+  width               : 100%;
+  height              : auto;
+  display             : grid;
+  grid-row-gap        : 3rem;
+  grid-template-areas : 'a'
+                        'b' 
+                        'c';
 }
 
 #pay_data {  
-  padding: 1rem 2rem 1rem 2rem;
-  color: whitesmoke;
-  height: auto;
-  width: auto;
-  align-items: center;
-  grid-area: c;
-  display: grid;  
+  padding          : 1rem 2rem 1rem 2rem;
+  color            : whitesmoke;
+  height           : auto;
+  width            : auto;
+  align-items      : center;
+  grid-area        : c;
+  display          : grid;  
+  overflow         : visible;
+  border           : .2rem solid #DCDCDC;
+  background-color : lightskyblue;
   grid-template-areas: 'id     hours     pay'
                        'reg_id reg_hours reg_pay'
                        'ot_id  ot_hours  ot_pay'
                        'tot_id tot_hours tot_pay';
-  background-color: lightskyblue;
-  border              : .2rem solid #DCDCDC;
-  overflow: visible;
-  /*box-shadow: .25rem 0 .5rem rgba(25, 25, 25, 0.5) inset;*/
+  box-shadow: .25rem .2rem .5rem rgba(25, 25, 25, 0.3);
 }
 
 
@@ -155,15 +164,14 @@ main {
 
 table {
   width: 100%;
+  box-shadow: .25rem .2rem .5rem rgba(25, 25, 25, 0.3);
 }
 
-thead td {  
-  justify-content: center;
-  text-align: center;
-}
+
 
 tbody tr:hover {
   background-color: skyblue;
+  cursor: pointer;
 }
 
 thead {
@@ -177,5 +185,9 @@ table, td {
 }
 
 td {
-  padding: 0 1rem 0 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+#pay {
+  text-align: right;
 }
