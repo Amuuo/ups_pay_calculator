@@ -58,19 +58,33 @@
         <input class="shift_submit_button" type="button" value="Submit Shift"></input>
       </div>
     </div>
-    <div id="pay_data">
-      <p style="grid-area: hours">Hours</p>
-      <p style="grid-area: pay">Earnings</p>
-      <p style="grid-area: tot_id">Total</p>
-      <p style="grid-area: reg_id">Regular</p>
-      <p style="grid-area: ot_id">Overtime</p>
-      <p id="reg_hours" style="grid-area: reg_hours"></p>
-      <p id="reg_pay"   style="grid-area: reg_pay"></p>
-      <p id="ot_hours"  style="grid-area: ot_hours"></p>
-      <p id="ot_pay"    style="grid-area: ot_pay"></p>
-      <p id="tot_hours" style="grid-area: tot_hours"></p>
-      <p id="tot_pay"   style="grid-area: tot_pay"></p>
-    </div>
+    <table id="pay_data">
+      <tr>    
+        <td style="width: 30%"></td>
+        <th scope="col" col=2 style="width: 30%"> Hours</th>
+        <th scope="col" style="width: 30%"> Earnings</th>
+      </tr>
+      <tr>
+        <th scope="row">Regular</th>
+        <td id="reg_hours"></td>
+        <td id="reg_pay"></td>
+      </tr>
+      <tr>
+        <th scope="row">Overtime</th>
+        <td id="ot_hours" col=2></td>
+        <td id="ot_pay" col=3></td>        
+      </tr>
+      <tr>
+        <th scope="row">Total</th>
+        <td id="tot_hours" col=2></td>
+        <td id="tot_pay" col=3></td>
+      </tr>
+      <tr>
+        <th scope="row">Avg Payrate</th>
+        <td id="avg_payrate" colspan=2></td>
+      </tr>
+
+    </table>
     <?php 
       
       $conn = new mysqli("localhost", "root", "", "ups");
@@ -95,17 +109,14 @@
       }
       echo "</table>";
     ?>   
+  <footer>
+    <div id="footer">
+      Adam Williams &copy; 2020
+    </div>
+  </footer>
   </main>
 </body>  
 
 <script src="js/index.js"></script>
 </html>
 
-<?php
-
-  if ($_GET['id']):
-    $con = mysqli_connect('localhost', 'root', '', 'ups');
-    $sql = "SELECT * FROM ups.employee e WHERE e.id=$_GET[id]";
-    
-  endif;
-?>

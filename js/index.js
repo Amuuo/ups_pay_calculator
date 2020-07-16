@@ -156,7 +156,7 @@ let current_workday = new Workday();
 
 $('document').ready(() => {
 
-  $('#pay_data').hide();
+  //$('#pay_data').hide();
     
   $('.shift_submit_button').click(() => {
     let first_shift = new Shift({
@@ -167,7 +167,7 @@ $('document').ready(() => {
     employees[0].insertWorkday(current_workday);
     employees[0].work_history[0].renderWorkdayPayData();
     
-    $('#pay_data').slideDown(400);    
+    //$('#pay_data').slideDown(400);    
     //$('.shift_input_container').hide(200);
     //$('.shift_input_container').del
     
@@ -193,8 +193,8 @@ $('document').ready(() => {
 
   $.ajax({
     type: 'GET',
-    url: 'index.php',
-    data: 'id=' + 1,
+    url: 'test.php',
+    data: 'id=1',
     success: function(msg) {
       console.log(msg.first_name);
       console.log(msg.last_name);
