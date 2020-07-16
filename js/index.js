@@ -156,9 +156,6 @@ let current_workday = new Workday();
 
 $('document').ready(() => {
 
-  
-  $('#Checkboxes1').buttonset();  
-  
   $('#pay_data').hide();
     
   $('.shift_submit_button').click(() => {
@@ -170,19 +167,41 @@ $('document').ready(() => {
     employees[0].insertWorkday(current_workday);
     employees[0].work_history[0].renderWorkdayPayData();
     
-    $('#pay_data').show(200);    
+    $('#pay_data').slideDown(400);    
     //$('.shift_input_container').hide(200);
-
-    $('#shift_start_input').replaceWith($('<div>').text(`${employees[0].work_history[0].shifts[0].shift_start}`));
-    $('#shift_end_input').replaceWith($('<div>').text(`${employees[0].work_history[0].shifts[0].shift_end}`));
-    $('.shift_input_container').prepend($('<div>').addClass('shift_start_container').text('Shift 1: '));
+    //$('.shift_input_container').del
+    
+    $('#shift_start_input').replaceWith($('<div>').text(
+      `${employees[0].work_history[0].shifts[0].shift_start}`));    
+    
+    $('#shift_end_input').replaceWith($('<div>')
+      .text(`${employees[0].work_history[0].shifts[0].shift_end}`));
+    
+    $('.shift_input_container').prepend($('<div>')
+      .addClass('shift_start_container').text('Shift 1: '));
+    
     $('label[for="shift_start_input"]').text('Start');
     $('label[for="shift_end_input"]').text('End');
     $('.shift_submit_button').remove();
-    $('.employee_record').append($('<div>').attr('id', 'second_shift_button').text('+ Add Double Shift'));
-    $('.shift_input_container').css('justify-content', 'center');
+    
+    $('.employee_record').append($('<div>')
+      .attr('id', 'second_shift_button').text('+ Add Double Shift').hide());
+    
+      $('#second_shift_button').slideDown(500);
+    $('.shift_input_container').css('justify-content', 'center');    
   })
+
+  $.ajax({
+    type: 'GET',
+    url: 'index.php',
+    data: 'id=' + 1,
+    success: function(msg) {
+      console.log(msg.first_name);
+      console.log(msg.last_name);
+    }
+
+  });
   
-  console.log(employees[0].shifts);
+
 
 });
