@@ -151,6 +151,18 @@ let employees = [
 ];
 
 
+async function postData(url = '', data = {}) {
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'text/html'
+    },
+    body: toString(data)
+  });
+  return response;
+}
+
 
 let current_workday = new Workday();  
 
@@ -189,19 +201,18 @@ $('document').ready(() => {
     
       $('#second_shift_button').slideDown(500);
     $('.shift_input_container').css('justify-content', 'center');    
-  })
-
-  $.ajax({
-    type: 'GET',
-    url: 'test.php',
-    data: 'id=1',
-    success: function(msg) {
-      console.log(msg.first_name);
-      console.log(msg.last_name);
-    }
-
   });
+
+  fetch('http://localhost/test.php')
+  .then(response => {
+    response.text().then(text => {
+      $(text).insertBefore('footer');
+      //$('body').append(text);
+
+    })
+  });  
+  
+});
   
 
 
-});
