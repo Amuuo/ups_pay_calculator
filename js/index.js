@@ -199,21 +199,26 @@ $('document').ready(() => {
     $('.employee_record').append($('<div>')
       .attr('id', 'second_shift_button').text('+ Add Double Shift').hide());
     
-      $('#second_shift_button').slideDown(500);
-    //$('.shift_input_container').css('justify-content', 'center');    
+      $('#second_shift_button').slideDown(500);     
   });
 
 
+  $('#show_employee_button').click(() => {
 
-  fetch('http://localhost/test.php')
-  .then(response => {
-    response.text().then(text => {
-      $(text).insertBefore('footer');
-      //$('body').append(text);
-
-    })
-  });  
-  
+    fetch('http://localhost/test.php')
+    .then(response => {
+      response.text().then(text => {
+        console.log('fetch response');
+        $(text).insertAfter($('#show_employee_button'));
+        $('#employee_table2').slideUp(0);
+        $('#employee_table2').slideDown(200);
+        //$(text).insertBefore('footer');
+        //$('body').append(text);
+        
+      })
+    });  
+  })
+    
 });
   
 

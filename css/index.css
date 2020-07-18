@@ -163,8 +163,8 @@ main {
 }
 
 #pay_data th, td {
-  padding: .5rem 1.25rem .5rem 1.25rem;
-  border          : .1rem solid white;
+  padding : .5rem 1.25rem .5rem 1.25rem;
+  border  : .1rem solid white;
 }
 
 
@@ -213,4 +213,10 @@ td {
 
 #footer {
   text-align: center;
+}
+
+#show_employee_button {  
+  place-self: center;
+  height: 2rem;
+  width: 50%;
 }
