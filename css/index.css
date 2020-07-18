@@ -1,3 +1,8 @@
+:root {
+  --ups-blue : #7FC2FF;
+  --ups-blue-light: #99CEFF;
+}
+
 
 
 html {  
@@ -40,7 +45,7 @@ body {
   display          : grid;  
   background-color : aliceblue;
   grid-template    : repeat(4, auto) / repeat(3, auto);  
-  border           : .2rem solid lightskyblue
+  border           : .2rem solid var(--ups-blue);
 }
 
 
@@ -83,7 +88,7 @@ body {
   width            : 100%;  
   font-style       : italic;
   color            : whitesmoke;
-  background-color : lightskyblue;
+  background-color : var(--ups-blue);
   grid-column      : span 3;
 }
 
@@ -99,7 +104,7 @@ body {
   height            : 2rem;
   padding           : 1rem; 
   align-items       : center;
-  border-bottom     : .1rem solid lightskyblue;
+  border-bottom     : .1rem solid var(--ups-blue);
 }
 
 .identifier {
@@ -113,7 +118,7 @@ body {
   grid-column      : 1;
   justify-content  : flex-end;
   align-items      : center;  
-  background-color : lightskyblue;
+  background-color : var(--ups-blue);
 }
 
 #logo {
@@ -142,7 +147,7 @@ main {
   
   grid-row      : 2;  
   border           : .2rem solid white; /* rgba(56, 78, 178, 0.3);*/
-  background-color : lightskyblue;
+  background-color : var(--ups-blue);
   box-shadow       : .25rem .2rem .5rem rgba(25, 25, 25, 0.3);
   border-collapse: collapse;
   box-sizing: border-box;
@@ -172,7 +177,7 @@ table {
 
 
 tbody tr:hover {
-  background-color: skyblue;
+  background-color: var(--ups-blue-light);
   cursor: pointer;
 }
 

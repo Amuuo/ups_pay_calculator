@@ -59,7 +59,10 @@
       </tr>
 
     </table>
-
+    <input id    = "show_employee_button" 
+           type  = "button" 
+           value = "Show Employee Data">
+    </input>
   <footer>
     <div id="footer">
       Adam Williams &copy; 2020

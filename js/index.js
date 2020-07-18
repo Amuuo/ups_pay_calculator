@@ -200,8 +200,10 @@ $('document').ready(() => {
       .attr('id', 'second_shift_button').text('+ Add Double Shift').hide());
     
       $('#second_shift_button').slideDown(500);
-    $('.shift_input_container').css('justify-content', 'center');    
+    //$('.shift_input_container').css('justify-content', 'center');    
   });
+
+
 
   fetch('http://localhost/test.php')
   .then(response => {
