@@ -1,6 +1,8 @@
 
 <?php
   
+//==============================================================================
+
   function addTblCell(&$data) {
     echo "<td>$data</td>";
   }    
@@ -25,7 +27,9 @@
     echo "</tr>";
   }
 
-      
+//==============================================================================
+
+
   $conn = new mysqli("localhost", "root", "", "ups");
               
   if($conn->connect_error)
@@ -35,16 +39,22 @@
     echo "Could not receive the results of query";
   
   
-  echo "<table id=\"employee_table2\" align=\"center\">";
+  echo "<table id=\"employee_table\" align=\"center\">";
   
   addTableHeaderRow($conn, "employee");
   
   while($row = $results->fetch_assoc()) {
     echo "<tr>";          
     $format_pay_rate = number_format($row["pay_rate"], 2);
-    echo "<td align=\"center\">{$row["id"]}</td><td>{$row["first_name"]}</td>";
-    echo "<td>{$row["last_name"]}</td><td id=\"pay\">\${$format_pay_rate}</td>";
+    echo "<td align=\"center\">{$row["id"]}</td>";
+    echo "<td>{$row["first_name"]}</td>";
+    echo "<td>{$row["last_name"]}</td>";
+    echo "<td id=\"pay\">\${$format_pay_rate}</td>";
+    echo "<td>{$row["address_id"]}</td>";
+    echo "<td>{$row["email"]}</td>";
     echo "</tr>";
   }
   echo "</table>";
+
+//==============================================================================
 ?>  

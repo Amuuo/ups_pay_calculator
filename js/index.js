@@ -183,21 +183,33 @@ $('document').ready(() => {
     //$('.shift_input_container').hide(200);
     //$('.shift_input_container').del
     
-    $('#shift_start_input').replaceWith($('<div>').text(
-      `${employees[0].work_history[0].shifts[0].shift_start}`));    
+    $('#shift_start_input')
+      .replaceWith($('<div>')
+      .text(`${employees[0].work_history[0].shifts[0].shift_start}`));    
     
-    $('#shift_end_input').replaceWith($('<div>')
+    $('#shift_end_input')
+      .replaceWith($('<div>')
       .text(`${employees[0].work_history[0].shifts[0].shift_end}`));
     
-    $('.shift_input_container').prepend($('<div>')
-      .addClass('shift_start_container').text('Shift 1: '));
+    $('.shift_input_container')
+      .prepend($('<div>')
+      .addClass('shift_start_container')
+      .text('Shift 1: '));
     
-    $('label[for="shift_start_input"]').text('Start');
-    $('label[for="shift_end_input"]').text('End');
-    $('.shift_submit_button').remove();
+    $('label[for="shift_start_input"]')
+      .text('Start');
     
-    $('.employee_record').append($('<div>')
-      .attr('id', 'second_shift_button').text('+ Add Double Shift').hide());
+      $('label[for="shift_end_input"]')
+      .text('End');
+    
+      $('.shift_submit_button')
+      .remove();
+    
+    $('.employee_record')
+      .append($('<div>')
+      .attr('id', 'second_shift_button')
+      .text('+ Add Double Shift')
+      .hide());
     
       $('#second_shift_button').slideDown(500);     
   });
@@ -209,16 +221,33 @@ $('document').ready(() => {
     .then(response => {
       response.text().then(text => {
         console.log('fetch response');
-        $(text).insertAfter($('#show_employee_button'));
-        $('#employee_table2').slideUp(0);
-        $('#employee_table2').slideDown(200);
+        $(text).insertBefore($('footer'));
         //$(text).insertBefore('footer');
         //$('body').append(text);
         
-      })
+      });
+      $('#show_employee_button')
+        .attr('id', 'hide_employee_button')
+        .attr('value', 'Hide Employee Data');          
     });  
-  })
-    
+    /*
+    fetch('http://localhost/to_json.php')
+    .then(response => {
+      response.text().then(text => {
+        console.log(text);
+        $('<p>').insertBefore($('footer'))
+        .text(text);
+      })
+    });
+    */
+  });
+  
+  $('#hide_employee_button')
+    .click(() => {
+        $('#employee_table2').remove();
+      }
+    )
+    .attr('id', 'show_employee_button');
 });
   
 
