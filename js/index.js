@@ -222,15 +222,13 @@ $('document').ready(() => {
       response.text().then(text => {
         console.log('fetch response');
         $(text).insertBefore($('footer'));
-        //$(text).insertBefore('footer');
-        //$('body').append(text);
         
       });
       $('#show_employee_button')
         .attr('id', 'hide_employee_button')
         .attr('value', 'Hide Employee Data');          
     });  
-    /*
+    
     fetch('http://localhost/to_json.php')
     .then(response => {
       response.text().then(text => {
@@ -239,7 +237,7 @@ $('document').ready(() => {
         .text(text);
       })
     });
-    */
+    
   });
   
   $('#hide_employee_button')
