@@ -14,7 +14,7 @@ BEGIN
 	)
 	SELECT 
 		CONCAT(first_name, ' ', last_name)          AS 'name',
-		CONCAT('$', pay_rate)                     	AS 'pay rate',
+		CONCAT('$', pay_rate)                       AS 'pay rate',
 		DATE_FORMAT(start_datetime, "%m/%d/%Y")     AS 'date',
 		hours_worked                                AS 'hours worked',
 		calculate_overtime(job_name, hours_worked)  AS 'overtime worked',
