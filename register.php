@@ -7,7 +7,16 @@
 </head>
 
 <body>
-  
+  <div id="register_div">
+    <form id="register_form">
+      <div id="register_div_header">
+        Enter username and password to create an account to save your work/pay history
+      </div>
+      <input id="username_input" text="Username"></input>
+      <input id="password_input"></input>
+      <input id="submit_button" type="button"></input>
+    <form>
+  </div>
 </body>
 
 

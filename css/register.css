@@ -1,0 +1,49 @@
+html {
+  padding: 10rem 20rem 20rem 20rem;
+
+}
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+#register_form {
+  border-radius: 2rem;
+  display: grid;
+  grid-template: repeat(4, auto) / auto;
+  padding: 3rem 0 3rem 0;
+  height: 30rem;
+  width: 30rem;
+  background-color: lightblue;
+}
+
+#register_div_header {
+  text-align: center;
+  place-self: center;
+  margin: 0 5rem 0 5rem;
+}
+
+#username_input, #password_input {  
+  place-self: center;
+  height: 2rem;
+  width: 60%;
+}
+
+#username_input {
+  
+  grid-row: 2;
+}
+
+#password_input {
+  grid-row: 3;
+}
+
+#submit_button {
+  place-self: center;
+  grid-row: 4;
+  height: 2rem;
+  width: 60%;
+}
