@@ -75,8 +75,7 @@ class Workday {
         this.total_hours = (end_hour + 24) - start_hour;  
       else if (start_hour == end_hour)
         alert('Start time cannot equal end time');  
-  
-      console.log(`From constructor:\nTotal hours: ${this.total_hours}`);
+
     }
   }
 
@@ -97,6 +96,20 @@ class Workday {
       this.$overtime_pay_cell = $('#ot_pay');
       this.$total_hours_cell = $('#tot_hours');
       this.$total_pay_cell = $('#tot_pay');
+    }
+
+    updateTable() {
+    
+      let workday = employees[0].work_history[0];
+
+      this.$regular_hours_cell  .text(workday.regular_hours.toFixed(2))
+      this.$regular_pay_cell    .text(`$${workday.regular_pay.toFixed(2)}`)      
+      
+      this.$overtime_hours_cell .text(workday.overtime_hours.toFixed(2))
+      this.$overtime_pay_cell   .text(`$${workday.overtime_pay.toFixed(2)}`)      
+      
+      this.$total_hours_cell    .text(workday.total_hours.toFixed(2))      
+      this.$total_pay_cell      .text(`$${workday.total_pay.toFixed(2)}`)
     }
   }
 
@@ -132,17 +145,7 @@ class Workday {
 
 
   updateReportTable() {
-    
-    let workday = employees[0].work_history[0];
 
-    $('#reg_hours') .text(workday.regular_hours.toFixed(2))
-    $('#reg_pay')   .text(`$${workday.regular_pay.toFixed(2)}`)      
-    
-    $('#ot_hours')  .text(workday.overtime_hours.toFixed(2))
-    $('#ot_pay')    .text(`$${workday.overtime_pay.toFixed(2)}`)      
-    
-    $('#tot_hours') .text(workday.total_hours.toFixed(2))      
-    $('#tot_pay')   .text(`$${workday.total_pay.toFixed(2)}`)
       
 
   }
