@@ -1,3 +1,6 @@
+const OT_LIMIT_HOURS = 8;
+
+
 
 class Employee {
 
@@ -6,7 +9,7 @@ class Employee {
   _payRate   = 0.0;
   work_history = []  
   
-  constructor(fullName, payRate) {
+  constructor(fullName = 'Enter Name Here', payRate = 0.0) {
     this.fullName = fullName;
     this.payRate  = payRate;
   }
@@ -23,9 +26,9 @@ class Employee {
   }
 
   set firstName(fName) { this._firstName = fName; }
-  set lastName(lName)  { this._lastName  = lName; }
-  set payRate(pRate)   { this._payRate   = pRate; }
-  set fullName(name) { 
+  set lastName (lName) { this._lastName  = lName; }
+  set payRate  (pRate) { this._payRate   = pRate; }
+  set fullName (name)  { 
     [this._firstName, this._lastName] = name.split(' ');
   }
   
@@ -38,15 +41,15 @@ class Employee {
 };
 
 
+
 class Workday {
   
-
   total_hours    = 0.0
-  regular_hours  = 0.0;
-  overtime_hours = 0.0;
-  regular_pay    = 0.0;
-  overtime_pay   = 0.0;
-  total_pay      = 0.0;
+  regular_hours  = 0.0
+  overtime_hours = 0.0
+  regular_pay    = 0.0
+  overtime_pay   = 0.0
+  total_pay      = 0.0
   shifts         = []
 
   addShift(shift) {
@@ -68,11 +71,11 @@ class Workday {
     }
     else if (this.shifts.length == 1) {
       this.total_hours = this.shifts[0].total_hours;
-      if (this.total_hours >= 5) {
-        this.overtime_hours = this.total_hours - 5;
-        this.regular_hours = 5;
+      if (this.total_hours >= OT_LIMIT_HOURS) {
+        this.overtime_hours = this.total_hours - OT_LIMIT_HOURS;
+        this.regular_hours = OT_LIMIT_HOURS;
       }
-      else if (this.total_hours < 5) {
+      else if (this.total_hours < OT_LIMIT_HOURS) {
         this.overtime_hours = 0;
         this.regular_hours = this.total_hours;
       }
@@ -97,7 +100,7 @@ class Workday {
       .text(`$${employees[0].work_history[0].regular_pay.toFixed(2)}`)
       
     $('#ot_hours')
-        .text(employees[0].work_history[0].overtime_hours.toFixed(2))
+      .text(employees[0].work_history[0].overtime_hours.toFixed(2))
 
     $('#ot_pay')
       .text(`$${employees[0].work_history[0].overtime_pay.toFixed(2)}`)
@@ -111,6 +114,7 @@ class Workday {
 
   }
 }
+
 
 
 class Shift {
@@ -141,14 +145,6 @@ class Shift {
   }  
 }
 
-let employees = [
-  new Employee('Adam Williams', 14.00), 
-  /*
-  new Employee('Andrew Valderrama', 14.00),
-  new Employee('Alex Maceido', 14.00),
-  new Employee('Chris Ortiz', 14.00)
-  */
-];
 
 
 async function postData(url = '', data = {}) {
@@ -164,81 +160,136 @@ async function postData(url = '', data = {}) {
 }
 
 
-let current_workday = new Workday();  
 
-$('document').ready(() => {
+function modify_form_divs() {
 
-  //$('#pay_data').hide();
-    
-  $('.shift_submit_button').click(() => {
-    let first_shift = new Shift({
-      'start': $('#shift_start_input').val(), 
-      'end'  : $('#shift_end_input')  .val()
-    });
-    current_workday.addShift(first_shift);
-    employees[0].insertWorkday(current_workday);
-    employees[0].work_history[0].renderWorkdayPayData();
-    
-    //$('#pay_data').slideDown(400);    
-    //$('.shift_input_container').hide(200);
-    //$('.shift_input_container').del
-    
-    $('#shift_start_input')
-      .replaceWith($('<div>')
+  let tmp_name = $('#name_input').val();
+  let tmp_rate = $('#hourly_rate_input').val();
+
+  $('#name_input').replaceWith(
+    $('<div>')
+      .addClass('after_input')
+      .text(tmp_name));
+  
+  $('#hourly_rate_input').replaceWith(
+    $('<div>')
+      .addClass('after_input')
+      .text('$' + tmp_rate + '/hr'));
+  
+  $('#shift_start_input').replaceWith(
+    $('<div>')
       .text(`${employees[0].work_history[0].shifts[0].shift_start}`));    
-    
-    $('#shift_end_input')
-      .replaceWith($('<div>')
+  
+  $('#shift_end_input').replaceWith(
+    $('<div>')
       .text(`${employees[0].work_history[0].shifts[0].shift_end}`));
-    
-    $('.shift_input_container')
-      .prepend($('<div>')
+  
+  $('.shift_input_container').prepend(
+    $('<div>')
       .addClass('shift_start_container')
       .text('Shift 1: '));
-    
-    $('label[for="shift_start_input"]')
-      .text('Start');
-    
-      $('label[for="shift_end_input"]')
-      .text('End');
-    
-      $('.shift_submit_button')
-      .remove();
-    
-    $('.employee_record')
-      .append($('<div>')
+  
+  $('label[for="shift_start_input"]')
+    .text('Start');
+  
+    $('label[for="shift_end_input"]')
+    .text('End');
+  
+    $('.shift_submit_button')
+    .remove();
+  
+  $('.employee_record').append(
+    $('<div>')
       .attr('id', 'second_shift_button')
       .text('+ Add Double Shift')
-      .hide());
-    
-      $('#second_shift_button').slideDown(500);     
+  );
+}
+
+
+
+function import_shift() {
+  
+  let first_shift = new Shift({
+    'start': $('#shift_start_input').val(), 
+    'end'  : $('#shift_end_input')  .val()
   });
+  
+  current_workday.addShift(first_shift);
+}
 
 
-  $('#show_employee_button').click(() => {
 
-    fetch('http://localhost/test.php')
-    .then(response => {
-      response.text().then(text => {
-        console.log('fetch response');
-        $(text).insertBefore($('footer'));
-        
-      });
-      $('#show_employee_button')
-        .attr('id', 'hide_employee_button')
-        .attr('value', 'Hide Employee Data');          
-    });  
-    
-    fetch('http://localhost/to_json.php')
-    .then(response => {
-      response.text().then(text => {
-        console.log(text);
-        $('<p>').insertBefore($('footer'))
-        .text(text);
-      })
+function create_new_employee() {
+
+  employees.push(
+    new Employee(
+      $('#name_input').val(), 
+      parseFloat($('#hourly_rate_input').val())
+    )
+  );
+
+  employees[0].insertWorkday(current_workday);
+  employees[0].work_history[0].renderWorkdayPayData();
+}
+
+const fetch_employee_data = () => {
+
+  fetch('http://localhost/test.php')
+  .then(response => {
+    response.text().then(text => {
+      console.log('fetch response');
+      $(text).insertBefore($('footer'));
+      
     });
-    
+    $('#show_employee_button')
+      .attr('id', 'hide_employee_button')
+      .attr('value', 'Hide Employee Data');          
+  });  
+  
+  fetch('http://localhost/to_json.php')
+  .then(response => {
+    response.text().then(text => {
+      console.log(text);
+      $('<p>').insertBefore($('footer'))
+      .text(text);
+    })
   });
+}
+
+const insert_register_link = () => {
+  
+  $register_link = $('<a>')
+                    .text('Register')
+                    .attr('href', './register.php')
+                    .attr('id', 'register_link');
+  
+  $('#footer').prepend($register_link);
+  //$register_link.insertBefore($('#footer'));
+}
+
+
+const setup_shift_submit_event_handler = () => {
+  
+  $('.shift_submit_button')
+    .click(() => {
+      import_shift();
+      create_new_employee();                      
+      modify_form_divs();            
+    });
+}
+
+let employees = [];
+let current_workday = new Workday();  
+
+//$('#pay_data').hide();
+
+$('document').ready(() => {
+    
+  insert_register_link();
+  setup_shift_submit_event_handler();
+
+
+  $('#show_employee_button').click(fetch_employee_data);  
   
   $('#hide_employee_button')
     .click(() => {

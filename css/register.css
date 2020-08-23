@@ -1,5 +1,9 @@
 html {
-  padding: 10rem 20rem 20rem 20rem;
+  padding: 10rem 10rem 20rem 10rem;
+  display         : flex;  
+  justify-content : center;
+  font-family     : 'Open Sans';
+  background-color: whitesmoke;
 
 }
 
@@ -16,18 +20,22 @@ body {
   grid-template: repeat(4, auto) / auto;
   padding: 3rem 0 3rem 0;
   height: 30rem;
-  width: 30rem;
+  max-width: 30rem;
+  min-width: 20rem;
   background-color: lightblue;
 }
 
 #register_div_header {
+  min-width: 20rem;
   text-align: center;
   place-self: center;
   margin: 0 5rem 0 5rem;
 }
 
 #username_input, #password_input {  
+  text-align: center;
   place-self: center;
+  justify-items: center;
   height: 2rem;
   width: 60%;
 }

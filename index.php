@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <a href="./register.php">Register</a>
+
   <header>
     <img id="logo" src="img/ups_logo.png">
   </header>  
@@ -17,9 +17,9 @@
 
     <div class="employee_record">
       <div class="identifier">Name</div>
-      <div class="value">Adam Williams</div>
+      <input id="name_input"></input>
       <div class="identifier">Hourly Rate</div>
-      <div class="value">$14.00</div> 
+      <input id="hourly_rate_input"></input>
       <div class="shift_input_container">
         <div class="shift_start_container">
           <label for="shift_start_input">Shift Start</label>
@@ -63,12 +63,12 @@
            type  = "button" 
            value = "Show Employee Data">
     </input>
-  <footer>
-    <div id="footer">
-      Adam Williams &copy; 2020
-    </div>
-  </footer>
   </main>
+    <footer>
+      <div id="footer">
+        <p>Adam Williams &copy; 2020</p>
+      </div>
+    </footer>
 </body>  
 
 <script src="js/index.js"></script>
