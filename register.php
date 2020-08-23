@@ -8,7 +8,7 @@
 
 <body>
   <div id="register_div">
-    <form id="register_form">
+    <form id="register_form" action="register_verify.php">
       <div id="register_div_header">
         Enter username and password to create an account to save your work/pay history
       </div>

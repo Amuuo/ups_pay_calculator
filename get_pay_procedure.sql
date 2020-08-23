@@ -13,7 +13,7 @@ BEGIN
 		FROM work_shift
 	)
 	SELECT 
-		CONCAT(first_name, ' ', last_name)          AS 'name',
+    CONCAT(first_name, ' ', last_name)          AS 'name',
 		CONCAT('$', pay_rate)                       AS 'pay rate',
 		DATE_FORMAT(start_datetime, "%m/%d/%Y")     AS 'date',
 		hours_worked                                AS 'hours worked',
