@@ -1,4 +1,4 @@
-const OT_LIMIT_HOURS = 8;
+const OT_LIMIT_HOURS = 5;
 
 
 
@@ -22,7 +22,7 @@ class Employee {
     this.work_history.push(workday);
 
     console.log('Workday inserted: ');
-    this.work_history[this.work_history.length - 1].displayWorkday();
+    
   }
 
   set firstName(fName) { this._firstName = fName; }
@@ -52,6 +52,54 @@ class Workday {
   total_pay      = 0.0
   shifts         = []
 
+  static Shift = class {    
+  
+    total_hours = 0.0;
+    shift_start = '';
+    shift_end   = '';
+    
+    constructor(shift_hours) {
+  
+      this.shift_start = shift_hours['start'];
+      this.shift_end   = shift_hours['end'];
+  
+      let start_time = shift_hours['start'].split(':');
+      let end_time   = shift_hours['end']  .split(':');
+      
+      let start_hour = parseFloat(start_time[0]) + (parseFloat(start_time[1])/60);
+      let end_hour   = parseFloat(end_time[0])   + (parseFloat(end_time[1])/60);
+      
+      if (end_hour > start_hour)
+        this.total_hours = end_hour - start_hour  
+      else if (start_hour > end_hour)
+        this.total_hours = (end_hour + 24) - start_hour;  
+      else if (start_hour == end_hour)
+        alert('Start time cannot equal end time');  
+  
+      console.log(`From constructor:\nTotal hours: ${this.total_hours}`);
+    }
+  }
+
+  static PayReportTable = class {
+
+    $regular_hours_cell  = null;
+    $regular_pay_cell    = null;
+    $overtime_hours_cell = null;
+    $overtime_pay_cell   = null;
+    $total_hours_cell    = null;
+    $total_pay_cell      = null;
+    $avg_payrate_cell    = null;
+  
+    constructor() {
+      this.$regular_hours_cell = $('#reg_hours');
+      this.$regular_pay_cell = $('#reg_pay');
+      this.$overtime_hours_cell = $('#ot_hours');
+      this.$overtime_pay_cell = $('#ot_pay');
+      this.$total_hours_cell = $('#tot_hours');
+      this.$total_pay_cell = $('#tot_pay');
+    }
+  }
+
   addShift(shift) {
 
     this.shifts.push(shift)
@@ -60,7 +108,7 @@ class Workday {
     
       this.total_hours = this.shifts[0].total_hours + this.shifts[1].total_hours;
       
-      if (this.total_hours > 8){
+      if (this.total_hours > 8) {
         this.overtime_hours = this.total_hours - 8;
         this.regular_hours = 8;
       }
@@ -82,34 +130,19 @@ class Workday {
     }
   }
 
-  constructor() {}
-  
 
-  displayWorkday() {
-    console.log(`Total hours: ${this.total_hours}`);
-    console.log(`Regular hours: ${this.regular_hours}`);
-    console.log(`Overtime hours: ${this.overtime_hours}`);
-  }
-
-  renderWorkdayPayData() {
+  updateReportTable() {
     
-    $('#reg_hours')
-      .text(employees[0].work_history[0].regular_hours.toFixed(2))
+    let workday = employees[0].work_history[0];
 
-    $('#reg_pay')
-      .text(`$${employees[0].work_history[0].regular_pay.toFixed(2)}`)
-      
-    $('#ot_hours')
-      .text(employees[0].work_history[0].overtime_hours.toFixed(2))
-
-    $('#ot_pay')
-      .text(`$${employees[0].work_history[0].overtime_pay.toFixed(2)}`)
-      
-    $('#tot_hours')
-      .text(employees[0].work_history[0].total_hours.toFixed(2))
-      
-    $('#tot_pay')
-      .text(`$${employees[0].work_history[0].total_pay.toFixed(2)}`)
+    $('#reg_hours') .text(workday.regular_hours.toFixed(2))
+    $('#reg_pay')   .text(`$${workday.regular_pay.toFixed(2)}`)      
+    
+    $('#ot_hours')  .text(workday.overtime_hours.toFixed(2))
+    $('#ot_pay')    .text(`$${workday.overtime_pay.toFixed(2)}`)      
+    
+    $('#tot_hours') .text(workday.total_hours.toFixed(2))      
+    $('#tot_pay')   .text(`$${workday.total_pay.toFixed(2)}`)
       
 
   }
@@ -117,33 +150,7 @@ class Workday {
 
 
 
-class Shift {
-  
-  total_hours = 0.0;
-  shift_start = '';
-  shift_end   = '';
-  
-  constructor(shift_hours) {
 
-    this.shift_start = shift_hours['start'];
-    this.shift_end   = shift_hours['end'];
-
-    let start_time = shift_hours['start'].split(':');
-    let end_time   = shift_hours['end']  .split(':');
-    
-    let start_hour = parseFloat(start_time[0]) + (parseFloat(start_time[1])/60);
-    let end_hour   = parseFloat(end_time[0])   + (parseFloat(end_time[1])/60);
-    
-    if (end_hour > start_hour)
-      this.total_hours = end_hour - start_hour  
-    else if (start_hour > end_hour)
-      this.total_hours = (end_hour + 24) - start_hour;  
-    else if (start_hour == end_hour)
-      alert('Start time cannot equal end time');  
-
-    console.log(`From constructor:\nTotal hours: ${this.total_hours}`);
-  }  
-}
 
 
 
@@ -209,7 +216,7 @@ function modify_form_divs() {
 
 function import_shift() {
   
-  let first_shift = new Shift({
+  let first_shift = new Workday.Shift({
     'start': $('#shift_start_input').val(), 
     'end'  : $('#shift_end_input')  .val()
   });
@@ -229,7 +236,7 @@ function create_new_employee() {
   );
 
   employees[0].insertWorkday(current_workday);
-  employees[0].work_history[0].renderWorkdayPayData();
+  employees[0].work_history[0].updateReportTable();
 }
 
 const fetch_employee_data = () => {
