@@ -16,10 +16,8 @@
   <main>
 
     <div class="employee_record">
-      <div class="identifier">Name</div>
-      <input id="name_input"></input>
       <div class="identifier">Hourly Rate</div>
-      <input id="hourly_rate_input"></input>
+      <input id="hourly_rate_input" type="number" min="0.00" max="10000.00" step="1.00"></input>
       <div class="shift_input_container">
         <div class="shift_start_container">
           <label for="shift_start_input">Shift Start</label>
