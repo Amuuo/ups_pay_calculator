@@ -40,10 +40,8 @@ class Shift {
       this.parent_workday.insertShiftAndCalculatePayBreakdown();
     }
 
-    this.$shift_end_input.keydown(updateShift);
-    this.$shift_start_input.keydown(updateShift);
-    this.$shift_end_input.mouseenter(updateShift);
-    this.$shift_start_input.mouseenter(updateShift);
+    this.$shift_end_input.keyup(updateShift);
+    this.$shift_start_input.keyup(updateShift);
   }
 }
 
@@ -106,6 +104,17 @@ class Workday {
   set shifts         (val) {this._shifts         = val}
 
 
+  resetWorkday() {
+
+    this.total_hours    = 0.0
+    this.regular_hours  = 0.0
+    this.overtime_hours = 0.0
+    this.regular_pay    = 0.0
+    this.overtime_pay   = 0.0
+    this.total_pay      = 0.0
+    this.shifts         = []
+  }
+
   insertShiftAndCalculatePayBreakdown() {
 
     
@@ -139,5 +148,6 @@ class Workday {
     this.overtime_pay = this.overtime_hours * (PAY_RATE * 1.5);
     this.total_pay    = this.regular_pay    + this.overtime_pay;
     this.payReportTable.updateTable();
+    this.resetWorkday();
   }
 }
