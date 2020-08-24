@@ -67,5 +67,6 @@
 </body>  
 <script src="js/index_classes.js"></script>
 <script src="js/index.js"></script>
+<script src="js/index_functions.js"></script>
 </html>
 
