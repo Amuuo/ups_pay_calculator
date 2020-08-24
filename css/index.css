@@ -36,14 +36,17 @@ body {
   place-self : center;
 }
 
-
-.employee_record {    
-  border-radius: 0.5rem;
-  grid-row      : 1;
-  display          : grid;  
-  background-color : aliceblue;
-  grid-template    : repeat(4, auto) / repeat(3, auto);  
+.blue_bubble_background {
   border           : .2rem solid var(--ups-blue);
+  background-color : aliceblue;
+  border-radius: 0.5rem;
+}
+
+
+.employee_record {      
+  grid-row      : 2;
+  display       : grid;    
+  grid-template : repeat(4, auto) / repeat(3, auto);    
 }
 
 
@@ -96,9 +99,8 @@ body {
 }
 
 #name_input, #hourly_rate_input {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  margin: 0.75rem 0 0.75rem 0.75rem;
+
+  margin: 0.75rem 0.1rem 0.75rem 0.1rem;
 }
 
 
@@ -151,7 +153,7 @@ main {
   max-width        : 550px;
   align-items      : center;
   place-self       : center;
-  grid-row         : 2;  
+  grid-row         : 3;  
   border           : .2rem solid white; /* rgba(56, 78, 178, 0.3);*/
   background-color : var(--ups-blue);
   box-shadow       : .25rem .2rem .5rem rgba(25, 25, 25, 0.3);
@@ -229,6 +231,13 @@ td {
 */
 #employee_table {
   grid-row: 3;  
+}
+
+
+#hourly_rate_container {
+  align-items: center;
+  display: flex;
+
 }
 
 
