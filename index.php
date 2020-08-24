@@ -23,11 +23,11 @@
       <div class="shift_input_container">
         <div class="shift_start_container">
           <label for="shift_start_input">Shift Start</label>
-          <input id="shift_start_input" class="shift_input" type="time" value="08:00"></input>
+          <input id="shift_start_input" class="shift_input" type="time" value="17:00"></input>
         </div>
         <div class="shift_end_container">
           <label for="shift_end_input">Shift End<br></label>
-          <input id="shift_end_input" class="shift_input" type="time" value="17:00"></input>
+          <input id="shift_end_input" class="shift_input" type="time"></input>
         </div>
       </div>
     </div>
