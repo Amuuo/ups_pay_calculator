@@ -10,6 +10,9 @@ let register_link = document.createElement('a')
 register_link.href = './register.php'
 register_link.id   = 'register_link'
 
+$('#hourly_rate_input').focusout(() => {
+  CURRENT_WORKDAY.insertShiftAndCalculatePayBreakdown();  
+})
 
 register_link.textContent  = 'Register'
 document.querySelector('footer').prepend(register_link)
