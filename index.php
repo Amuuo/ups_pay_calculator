@@ -57,10 +57,7 @@
       </tr>
 
     </table>
-    <input id    = "show_employee_button" 
-           type  = "button" 
-           value = "Show Employee Data">
-    </input>
+
   </main>
     <footer>
       <div id="footer">
@@ -68,7 +65,7 @@
       </div>
     </footer>
 </body>  
-
+<script src="js/index_classes.js"></script>
 <script src="js/index.js"></script>
 </html>
 
