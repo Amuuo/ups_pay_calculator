@@ -27,7 +27,7 @@
           <label for="shift_end_input">Shift End<br></label>
           <input id="shift_end_input" class="shift_input" type="time" value="17:00"></input>
         </div>
-        <input class="shift_submit_button" type="button" value="Submit Shift"></input>
+        <input class="shift_submit_button" type="button" value="Save Shift"></input>
       </div>
     </div>
     <table id="pay_data">

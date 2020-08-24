@@ -11,8 +11,8 @@ class Shift {
     this.$shift_start_input = $('#shift_start_input')
     this.$shift_end_input   = $('#shift_end_input'  )
     
-    this.$shift_end_input.mouseout(() => {
-      
+    const updateShift = () => {
+     
       this.shift_start = this.$shift_start_input .val().split(':');
       this.shift_end   = this.$shift_end_input   .val().split(':');
       
@@ -30,7 +30,12 @@ class Shift {
         alert('Start time cannot equal end time');  
 
       console.log(this);
-    });
+    }
+
+    this.$shift_end_input.keydown(updateShift);
+    this.$shift_start_input.keydown(updateShift);
+    this.$shift_end_input.mouseenter(updateShift);
+    this.$shift_start_input.mouseenter(updateShift);
   }
 }
 

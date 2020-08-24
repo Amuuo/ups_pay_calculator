@@ -7,47 +7,6 @@ let   MAIN_SHIFT       = new Shift(CURRENT_WORKDAY)
 
 
 
-
-
-
-function modify_form_divs() {    
-  
-  $('#hourly_rate_input').replaceWith( 
-    $('<div>')
-      .addClass('after_input')
-      .text('$' + PAY_RATE + '/hr'));
-  
-  $('#shift_start_input').replaceWith( 
-    $('<div>')
-      .text(`${CURRENT_WORKDAY.shifts[0].shift_start}`));    
-  
-  $('#shift_end_input').replaceWith(
-    $('<div>')
-      .text(`${CURRENT_WORKDAY.shifts[0].shift_end}`));
-  
-  $('.shift_input_container').prepend(
-    $('<div>')
-      .addClass('shift_start_container')
-      .text('Shift 1: '));
-  
-  $('label[for="shift_start_input"]')
-    .text('Start');
-  
-    $('label[for="shift_end_input"]')
-    .text('End');
-  
-    $('.shift_submit_button')
-    .remove();
-  
-  $('.employee_record').append(
-    $('<div>')
-      .attr('id', 'second_shift_button')
-      .text('+ Add Double Shift')
-  );
-}
-
-
-
 const insert_register_link = () => {
   
   $register_link = $('<a>')
@@ -65,8 +24,7 @@ const setup_shift_submit_event_handler = () => {
   
   $('.shift_submit_button')
     .click(() => {
-      CURRENT_WORKDAY.insertShiftAndCalculatePayBreakdown();                    
-      //modify_form_divs();            
+      CURRENT_WORKDAY.insertShiftAndCalculatePayBreakdown();                              
     });
 }
 
