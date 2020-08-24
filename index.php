@@ -15,9 +15,11 @@
   </header>  
   <main>
 
-    <div class="employee_record">
+    <div id="hourly_rate_container" class="blue_bubble_background">
       <div class="identifier">Hourly Rate</div>
-      <input id="hourly_rate_input" type="number" value="14.50" min="0.00" max="10000.00" step="1.00"></input>
+       $<input id="hourly_rate_input" type="number" value="14.50" min="0.00" max="10000.00" step="1.00"></input>/hr 
+    </div>
+    <div class="employee_record blue_bubble_background">
       <div class="shift_input_container">
         <div class="shift_start_container">
           <label for="shift_start_input">Shift Start</label>
