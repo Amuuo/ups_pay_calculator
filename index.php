@@ -29,6 +29,7 @@
         <div class="shift_end_container">          
           <input id="shift_end_input" class="shift_input" type="time"></input>
         </div>
+        <input class="shift_submit_button" type="button" value="Save Shift"></input>
       </div>
       <input class="shift_input_button" type="button" value="Save Shift"></input>
     </div>
