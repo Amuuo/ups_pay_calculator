@@ -1,4 +1,9 @@
 
+
+let PAY_RATE = 0.0
+
+
+
 class Shift {    
 
   shift_hours = 0.0;
@@ -13,6 +18,8 @@ class Shift {
     
     const updateShift = () => {
      
+      this.parent_workday.shifts = []
+
       this.shift_start = this.$shift_start_input .val().split(':');
       this.shift_end   = this.$shift_end_input   .val().split(':');
       
@@ -30,6 +37,7 @@ class Shift {
         alert('Start time cannot equal end time');  
 
       console.log(this);
+      this.parent_workday.insertShiftAndCalculatePayBreakdown();
     }
 
     this.$shift_end_input.keydown(updateShift);
@@ -95,6 +103,7 @@ class Workday {
   set regular_pay    (val) {this._regular_pay    = val}
   set overtime_pay   (val) {this._overtime_pay   = val}
   set total_pay      (val) {this._total_pay      = val}
+  set shifts         (val) {this._shifts         = val}
 
 
   insertShiftAndCalculatePayBreakdown() {
