@@ -42,37 +42,45 @@ body {
   border-radius: 0.5rem;
 }
 
+.inline_paragraph {
+  display: inline-block;
+  place-self: center;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
 
 .employee_record {      
   grid-row      : 2;
   display       : grid;    
-  grid-template : repeat(4, auto) / repeat(3, auto);    
+  grid-template-columns : 1fr minmax(50%, 3fr) 1fr;
+  grid-template-rows: 1fr;
 }
 
 
 .shift_input_container {
-  width           : 100%;
-  margin          : 1rem 0 1rem 0;
+  width           : -webkit-fill-available;
   place-self      : center;
   display         : flex;
   flex-direction  : row;
   justify-content : space-evenly;
-  grid-column     : span 3;
+
 }
 
 .shift_start_container, .shift_end_container {
+  margin          : 0 .25rem 0 .25rem;
   font-size       : .75em;
   display         : flex;   
-  flex-direction  : column;      
   align-items     : center;  
   place-self      : center;
   justify-content : center;
-  width           : 25%;  
   height          : 100%;  
+  width           : 100%;
 }
 
-.shift_submit_button {
-  width : 30%;
+.shift_input_button {
+  grid-column: auto;
+  margin : 1rem;
+  padding: 0.5rem;
 }
 
 .shift_input {
@@ -235,6 +243,8 @@ td {
 
 
 #hourly_rate_container {
+  width: auto;
+  place-self: center;
   align-items: center;
   display: flex;
 
