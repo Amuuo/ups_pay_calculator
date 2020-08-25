@@ -39,17 +39,18 @@ body {
 .blue_bubble_background {
   border           : .2rem solid var(--ups-blue);
   background-color : aliceblue;
-  border-radius: 0.5rem;
+  border-radius    : 0.5rem;
 }
 
 .inline_paragraph {
-  display: inline-block;
-  place-self: center;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  display      : inline-block;
+  place-self   : center;
+  margin-left  : 1.5rem;
+  margin-right : 1.5rem;
 }
 
-.employee_record {      
+.employee_record {     
+  min-width     : 100%; 
   grid-row      : 2;
   display       : grid;    
   grid-template-columns : 1fr minmax(50%, 3fr) 1fr;
@@ -78,9 +79,9 @@ body {
 }
 
 .shift_input_button {
-  grid-column: auto;
-  margin : 1rem;
-  padding: 0.5rem;
+  grid-column : auto;
+  margin      : 1rem;
+  padding     : 0.5rem;
 }
 
 .shift_input {
