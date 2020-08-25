@@ -6,15 +6,16 @@ let PAY_RATE = 0.0
 
 class Shift {    
 
-  shift_hours = 0.0;
-  shift_start = '';
-  shift_end   = '';
+  shift_hours = 0.0
+  shift_start = ''
+  shift_end   = ''
   
   constructor(parent_workday) {
     
     this.parent_workday     = parent_workday
     this.$shift_start_input = $('#shift_start_input')
     this.$shift_end_input   = $('#shift_end_input'  )
+    this.$shift_pay_rate    = $('#hourly_rate_input')
     
     const updateShift = () => {
      
@@ -23,25 +24,32 @@ class Shift {
       this.shift_start = this.$shift_start_input .val().split(':');
       this.shift_end   = this.$shift_end_input   .val().split(':');
       
-      let start_hour = parseFloat(this.shift_start[0]) + (parseFloat(this.shift_end[1])/60);
-      let end_hour   = parseFloat(this.shift_end[0])   + (parseFloat(this.shift_start[1])/60);
+      let start_hour = parseFloat(this.shift_start[0]) + (parseFloat(this.shift_end[1])/60)
+      let end_hour   = parseFloat(this.shift_end[0])   + (parseFloat(this.shift_start[1])/60)
       
       
       if (end_hour > start_hour)
         this.shift_hours = end_hour - start_hour  
       
       else if (start_hour > end_hour)
-        this.shift_hours = (end_hour + 24) - start_hour;  
+        this.shift_hours = (end_hour + 24) - start_hour
       
       else if (start_hour == end_hour)
-        alert('Start time cannot equal end time');  
+        alert('Start time cannot equal end time')
 
       console.log(this);
-      this.parent_workday.insertShiftAndCalculatePayBreakdown();
+      this.parent_workday.insertShiftAndCalculatePayBreakdown()
+      this.resetShift();
     }
 
-    this.$shift_end_input.keyup(updateShift);
-    this.$shift_start_input.keyup(updateShift);
+    this.$shift_end_input.keyup(updateShift)
+    this.$shift_start_input.keyup(updateShift)
+  }
+
+  resetShift() {
+    this.shift_hours = 0.0;
+    this.shift_start = '';
+    this.shift_end   = '';
   }
 }
 
@@ -87,6 +95,10 @@ class Workday {
   _total_pay      = 0.0
   _shifts         = []
 
+  constructor() {
+    
+  }
+
   get total_hours    () {return this._total_hours    }
   get regular_hours  () {return this._regular_hours  }
   get overtime_hours () {return this._overtime_hours }
@@ -118,35 +130,35 @@ class Workday {
   insertShiftAndCalculatePayBreakdown() {
 
     
-    this.shifts.push(MAIN_SHIFT);
+    this.shifts.push(MAIN_SHIFT)
     
     if (this.shifts.length > 1) {
     
-      this._total_hours = this.shifts[0].shift_hours + this.shifts[1].shift_hours;
+      this._total_hours = this.shifts[0].shift_hours + this.shifts[1].shift_hours
       
       if (this.total_hours > 8) {
-        this.overtime_hours = this.total_hours - 8;
-        this.regular_hours = 8;
+        this.overtime_hours = this.total_hours - 8
+        this.regular_hours = 8
       }
       else {
-        this.overtime_hours = 0;
-        this.regular_hours = this.total_hours;
+        this.overtime_hours = 0
+        this.regular_hours = this.total_hours
       }
     }
     else if (this.shifts.length == 1) {
-      this.total_hours += this.shifts[this.shifts.length -1].shift_hours;
+      this.total_hours += this.shifts[this.shifts.length -1].shift_hours
       if (this.total_hours >= OT_LIMIT_HOURS) {
-        this.overtime_hours = this.total_hours - OT_LIMIT_HOURS;
-        this.regular_hours = OT_LIMIT_HOURS;
+        this.overtime_hours = this.total_hours - OT_LIMIT_HOURS
+        this.regular_hours = OT_LIMIT_HOURS
       }
       else if (this.total_hours < OT_LIMIT_HOURS) {
-        this.overtime_hours = 0;
-        this.regular_hours = this.total_hours;
+        this.overtime_hours = 0
+        this.regular_hours = this.total_hours
       }
     }
-    this.regular_pay  = this.regular_hours  * PAY_RATE;
-    this.overtime_pay = this.overtime_hours * (PAY_RATE * 1.5);
-    this.total_pay    = this.regular_pay    + this.overtime_pay;
+    this.regular_pay  = this.regular_hours  * PAY_RATE
+    this.overtime_pay = this.overtime_hours * (PAY_RATE * 1.5)
+    this.total_pay    = this.regular_pay    + this.overtime_pay
     this.payReportTable.updateTable();
     this.resetWorkday();
   }
