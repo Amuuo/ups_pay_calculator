@@ -43,10 +43,17 @@ body {
 }
 
 .inline_paragraph {
+<<<<<<< HEAD
   display      : inline-block;
   place-self   : center;
   margin-left  : 1.5rem;
   margin-right : 1.5rem;
+=======
+  display: inline-block;
+  place-self: center;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+>>>>>>> f71b30e... bug with pay report when shift_end would output lower pay with the  min time went over 30min
 }
 
 .employee_record, .employee_record2 {
@@ -84,12 +91,18 @@ body {
 }
 
 .shift_input_button {
+<<<<<<< HEAD
   grid-column : auto;
   margin-top: 1rem;
   margin-right: 2rem;
   margin-left: 2rem;
   margin-bottom: 1rem;
   padding     : 0.5rem;
+=======
+  grid-column: auto;
+  margin : 1rem;
+  padding: 0.5rem;
+>>>>>>> f71b30e... bug with pay report when shift_end would output lower pay with the  min time went over 30min
 }
 
 @keyframes appear {
