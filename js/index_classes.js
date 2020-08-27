@@ -30,7 +30,7 @@ class Shift {
                           parseFloat(this.shift_end[1])/60.0
       
       
-      if (this.shift_end[0] > this.shift_start[0])
+      if (end_time > start_time)
         this.shift_hours = end_time - start_time  
       
       else if (start_time > end_time)
