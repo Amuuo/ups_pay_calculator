@@ -24,17 +24,19 @@ class Shift {
       this.shift_start = this.$shift_start_input .val().split(':');
       this.shift_end   = this.$shift_end_input   .val().split(':');
       
-      let start_hour = parseFloat(this.shift_start[0]) + (parseFloat(this.shift_end[1])/60)
-      let end_hour   = parseFloat(this.shift_end[0])   + (parseFloat(this.shift_start[1])/60)
+      let start_time = parseFloat(this.shift_start[0]) + 
+                          parseFloat(this.shift_start[1])/60.0
+      let end_time   = parseFloat(this.shift_end[0])   + 
+                          parseFloat(this.shift_end[1])/60.0
       
       
-      if (end_hour > start_hour)
-        this.shift_hours = end_hour - start_hour  
+      if (this.shift_end[0] > this.shift_start[0])
+        this.shift_hours = end_time - start_time  
       
-      else if (start_hour > end_hour)
-        this.shift_hours = (end_hour + 24) - start_hour
+      else if (start_time > end_time)
+        this.shift_hours = (end_time + 24) - start_time
       
-      else if (start_hour == end_hour)
+      else if (start_time == end_time)
         alert('Start time cannot equal end time')
 
       console.log(this);
