@@ -13,16 +13,17 @@ class Shift {
   constructor(parent_workday) {
     
     this.parent_workday     = parent_workday
-    this.$shift_start_input = $('#shift_start_input')
-    this.$shift_end_input   = $('#shift_end_input'  )
-    this.$shift_pay_rate    = $('#hourly_rate_input')
+    
+    this.$shift_start_input = document.querySelector('#shift_start_input')
+    this.$shift_end_input   = document.querySelector('#shift_end_input')                                      
+    this.$shift_pay_rate    = document.querySelector('#hourly_rate_input')                                      
     
     const updateShift = () => {
      
-      this.parent_workday.shifts = []
+      
 
-      this.shift_start = this.$shift_start_input .val().split(':');
-      this.shift_end   = this.$shift_end_input   .val().split(':');
+      this.shift_start = this.$shift_start_input .value.split(':');
+      this.shift_end   = this.$shift_end_input   .value.split(':');
       
       let start_time = parseFloat(this.shift_start[0]) + 
                           parseFloat(this.shift_start[1])/60.0
@@ -43,9 +44,9 @@ class Shift {
       this.parent_workday.insertShiftAndCalculatePayBreakdown()
       this.resetShift();
     }
-
-    this.$shift_end_input.keyup(updateShift)
-    this.$shift_start_input.keyup(updateShift)
+    this.$shift_start_input.addEventListener('keyup', updateShift);
+    this.$shift_end_input  .addEventListener('keyup', updateShift);
+    this.$shift_pay_rate   .addEventListener('keyup', updateShift);    
   }
 
   resetShift() {
@@ -61,7 +62,6 @@ class PayReportTable {
   constructor(parent_workday) {
     
     this.parent_workday       = parent_workday;
-    
     this.$regular_hours_cell  = $('#reg_hours')
     this.$regular_pay_cell    = $('#reg_pay')
     this.$overtime_hours_cell = $('#ot_hours')
@@ -73,14 +73,14 @@ class PayReportTable {
 
   updateTable() {
   
-    this.$regular_hours_cell  .text(    this.parent_workday.regular_hours .toFixed(2))
-    this.$regular_pay_cell    .text(`$${this.parent_workday.regular_pay   .toFixed(2)}`)      
+    this.$regular_hours_cell  .text(    this.parent_workday.regular_hours  .toFixed(2))
+    this.$regular_pay_cell    .text(`$${this.parent_workday.regular_pay    .toFixed(2)}`)      
     
     this.$overtime_hours_cell .text(    this.parent_workday.overtime_hours .toFixed(2))
     this.$overtime_pay_cell   .text(`$${this.parent_workday.overtime_pay   .toFixed(2)}`)      
     
-    this.$total_hours_cell    .text(    this.parent_workday.total_hours .toFixed(2))      
-    this.$total_pay_cell      .text(`$${this.parent_workday.total_pay   .toFixed(2)}`)
+    this.$total_hours_cell    .text(    this.parent_workday.total_hours    .toFixed(2))      
+    this.$total_pay_cell      .text(`$${this.parent_workday.total_pay      .toFixed(2)}`)
   }
 }
 
@@ -95,6 +95,8 @@ class Workday {
   _regular_pay    = 0.0
   _overtime_pay   = 0.0
   _total_pay      = 0.0
+  _main_shift     = null;
+  _double_shift   = null;
   _shifts         = []
 
   constructor() {
@@ -107,6 +109,8 @@ class Workday {
   get regular_pay    () {return this._regular_pay    }
   get overtime_pay   () {return this._overtime_pay   }
   get total_pay      () {return this._total_pay      }
+  get main_shift     () {return this._main_shift     }
+  get double_shift   () {return this._double_shift   }
   get shifts         () {return this._shifts         }
 
   set total_hours    (val) {this._total_hours    = val}
@@ -115,6 +119,8 @@ class Workday {
   set regular_pay    (val) {this._regular_pay    = val}
   set overtime_pay   (val) {this._overtime_pay   = val}
   set total_pay      (val) {this._total_pay      = val}
+  set main_shift     (val) {this._main_shift     = val}
+  set double_shift   (val) {this._double_shift   = val}
   set shifts         (val) {this._shifts         = val}
 
 
@@ -125,18 +131,22 @@ class Workday {
     this.overtime_hours = 0.0
     this.regular_pay    = 0.0
     this.overtime_pay   = 0.0
+    this.main_shift     = null;
+    this.double_shift   = null;
     this.total_pay      = 0.0
     this.shifts         = []
   }
 
   insertShiftAndCalculatePayBreakdown() {
 
-    
+    if (this.main_shift == null) {
+      this.main_shift = MAIN_SHIFT;
+    }
     this.shifts.push(MAIN_SHIFT)
     
-    if (this.shifts.length > 1) {
+    if (this.main_shift && this.double_shift) {
     
-      this._total_hours = this.shifts[0].shift_hours + this.shifts[1].shift_hours
+      this._total_hours = this.main_shift.shift_hours + this.double_shift.shift_hours
       
       if (this.total_hours > 8) {
         this.overtime_hours = this.total_hours - 8
@@ -147,8 +157,8 @@ class Workday {
         this.regular_hours = this.total_hours
       }
     }
-    else if (this.shifts.length == 1) {
-      this.total_hours += this.shifts[this.shifts.length -1].shift_hours
+    else if (this.main_shift && !this.double_shift) {
+      this.total_hours = this.main_shift.shift_hours
       if (this.total_hours >= OT_LIMIT_HOURS) {
         this.overtime_hours = this.total_hours - OT_LIMIT_HOURS
         this.regular_hours = OT_LIMIT_HOURS
