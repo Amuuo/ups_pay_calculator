@@ -41,20 +41,13 @@ class Shift {
         alert('Start time cannot equal end time')
 
       console.log(this);
-      this.parent_workday.insertShiftAndCalculatePayBreakdown()
-      this.resetShift();
+      this.parent_workday.updateShifts()      
     }
     this.$shift_start_input.addEventListener('keyup', updateShift);
     this.$shift_end_input  .addEventListener('keyup', updateShift);
     this.$shift_pay_rate   .addEventListener('keyup', updateShift);    
   }
-
-  resetShift() {
-    this.shift_hours = 0.0;
-    this.shift_start = '';
-    this.shift_end   = '';
-  }
-}3
+}
 
 
 class PayReportTable {    
@@ -81,6 +74,7 @@ class PayReportTable {
     
     this.$total_hours_cell    .textContent =     this.parent_workday.total_hours    .toFixed(2)
     this.$total_pay_cell      .textContent = `$${this.parent_workday.total_pay      .toFixed(2)}`
+    this.$avg_payrate_cell    .textContent = `$${this.parent_workday.avg_payrate    .toFixed(2)}/hr`
   }
 }
 
@@ -89,20 +83,6 @@ class Workday {
   
   payReportTable = new PayReportTable(this);
   
-  _total_hours    = 0.0
-  _regular_hours  = 0.0
-  _overtime_hours = 0.0
-  _regular_pay    = 0.0
-  _overtime_pay   = 0.0
-  _total_pay      = 0.0
-  _main_shift     = null;
-  _double_shift   = null;
-  _shifts         = []
-
-  constructor() {
-    
-  }
-
   get total_hours    () {return this._total_hours    }
   get regular_hours  () {return this._regular_hours  }
   get overtime_hours () {return this._overtime_hours }
@@ -110,8 +90,8 @@ class Workday {
   get overtime_pay   () {return this._overtime_pay   }
   get total_pay      () {return this._total_pay      }
   get main_shift     () {return this._main_shift     }
-  get double_shift   () {return this._double_shift   }
-  get shifts         () {return this._shifts         }
+  get double_shift   () {return this._double_shift   }  
+  get avg_payrate    () {return this._avg_payrate    }
 
   set total_hours    (val) {this._total_hours    = val}
   set regular_hours  (val) {this._regular_hours  = val}
@@ -120,8 +100,8 @@ class Workday {
   set overtime_pay   (val) {this._overtime_pay   = val}
   set total_pay      (val) {this._total_pay      = val}
   set main_shift     (val) {this._main_shift     = val}
-  set double_shift   (val) {this._double_shift   = val}
-  set shifts         (val) {this._shifts         = val}
+  set double_shift   (val) {this._double_shift   = val}  
+  set avg_payrate    (val) {this._avg_payrate    = val}
 
 
   resetWorkday() {
@@ -134,15 +114,11 @@ class Workday {
     this.main_shift     = null;
     this.double_shift   = null;
     this.total_pay      = 0.0
-    this.shifts         = []
   }
 
-  insertShiftAndCalculatePayBreakdown() {
+  updateShifts() {
 
-    if (this.main_shift == null) {
-      this.main_shift = MAIN_SHIFT;
-    }
-    this.shifts.push(MAIN_SHIFT)
+    if (this.main_shift == null) this.main_shift = MAIN_SHIFT;
     
     if (this.main_shift && this.double_shift) {
     
@@ -171,6 +147,7 @@ class Workday {
     this.regular_pay  = this.regular_hours  * PAY_RATE
     this.overtime_pay = this.overtime_hours * (PAY_RATE * 1.5)
     this.total_pay    = this.regular_pay    + this.overtime_pay
+    this.avg_payrate  = this.total_pay      / this.total_hours
     this.payReportTable.updateTable();
     this.resetWorkday();
   }

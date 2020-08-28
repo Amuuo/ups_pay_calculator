@@ -170,6 +170,9 @@ main {
   box-sizing       : border-box;
 }
 
+#tot_pay {
+  font-weight: bolder;
+}
 
 #pay_data th[scope="col"] {
   text-align: center;
