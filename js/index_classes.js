@@ -14,8 +14,6 @@ class Shift {
     
     const updateShift = () => {
      
-      this.parent_workday.shifts = []
-
       this.shift_start = this.$shift_start_input .val().split(':');
       this.shift_end   = this.$shift_end_input   .val().split(':');
       
