@@ -14,37 +14,27 @@
     <img id="logo" src="img/ups_logo.png">
   </header>  
   <main>
+    <div id="form_container">
+      <div id="hourly_rate_container" class="blue_bubble_background">
+        <div class="identifier">Hourly Rate</div>
+        <label for="hourly_rate_input" value="Hourly Rate">Hourly Rate</label>
+         <input id="hourly_rate_input" data-type="currency" value="14.50" min="0.00" max="10000.00" step="1.00"></input>
+      </div>
+      <div class="employee_record blue_bubble_background">
+        <p class="inline_paragraph">Shift</p>
+        <div class="shift_input_container">
+          <div class="shift_start_container">          
+            <input id="shift_start_input" class="shift_input" type="time" value="17:00"></input>
+          </div>
+          <p>  -  </p>
+          <div class="shift_end_container">          
+            <input id="shift_end_input" class="shift_input" type="time"></input>
+          </div>
+        </div>
+        <input class="shift_input_button" type="button" value="Save Shift"></input>
+      </div>
+    </div>
 
-    <div id="hourly_rate_container" class="blue_bubble_background">
-      <div class="identifier">Hourly Rate</div>
-       $<input id="hourly_rate_input" type="number" value="14.50" min="0.00" max="10000.00" step="1.00"></input>/hr 
-    </div>
-    <div class="employee_record blue_bubble_background">
-      <p class="inline_paragraph">Shift</p>
-      <div class="shift_input_container">
-        <div class="shift_start_container">          
-          <input id="shift_start_input" class="shift_input" type="time" value="17:00"></input>
-        </div>
-        <p>  -  </p>
-        <div class="shift_end_container">          
-          <input id="shift_end_input" class="shift_input" type="time"></input>
-        </div>
-      </div>
-      <input class="shift_input_button" type="button" value="Save Shift"></input>
-    </div>
-    <div class="employee_record2 blue_bubble_background">
-      <p class="inline_paragraph">Shift</p>
-      <div class="shift_input_container">
-        <div class="shift_start_container">          
-          <input id="shift_start_input" class="shift_input" type="time" value="17:00"></input>
-        </div>
-        <p>  -  </p>
-        <div class="shift_end_container">          
-          <input id="shift_end_input" class="shift_input" type="time"></input>
-        </div>
-      </div>
-      <input class="shift_input_button" type="button" value="Save Shift"></input>
-    </div>
     <table id="pay_data">
       <tr>    
         <td style="width: 30%"></td>

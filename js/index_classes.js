@@ -12,7 +12,7 @@ class Shift {
   
   constructor(parent_workday) {
     
-    this.parent_workday     = parent_workday                                    
+    this.parent_workday    = parent_workday                                    
     this.shift_start_input = document.querySelector('#shift_start_input')
     this.shift_end_input   = document.querySelector('#shift_end_input')
     this.shift_pay_rate    = document.querySelector('#hourly_rate_input')
@@ -54,7 +54,7 @@ class PayReportTable {
   
   constructor(parent_workday) {
     
-    this.parent_workday       = parent_workday;    
+    this.parent_workday      = parent_workday;    
     this.regular_hours_cell  = document.querySelector('#reg_hours')    
     this.regular_pay_cell    = document.querySelector('#reg_pay')    
     this.overtime_hours_cell = document.querySelector('#ot_hours')    
@@ -62,6 +62,8 @@ class PayReportTable {
     this.total_hours_cell    = document.querySelector('#tot_hours')
     this.total_pay_cell      = document.querySelector('#tot_pay')    
     this.avg_payrate_cell    = document.querySelector('#avg_payrate')
+
+    console.log(Object.entries(this));
   }
 
   updateTable() {
@@ -98,31 +100,37 @@ class Workday {
 
   updateShifts() {
 
-    if (this.main_shift == null) this.main_shift = MAIN_SHIFT;
+    if (this.main_shift == null) 
+      this.main_shift = MAIN_SHIFT;
     
     if (this.main_shift && this.double_shift) {    
+      
       this._total_hours = this.main_shift.shift_hours + this.double_shift.shift_hours
       
       if (this.total_hours > 8) {      
+      
         this.overtime_hours = this.total_hours - 8
-        this.regular_hours = 8
+        this.regular_hours  = 8
       }
       else {
       
         this.overtime_hours = 0
-        this.regular_hours = this.total_hours
+        this.regular_hours  = this.total_hours
       }
     }
     else if (this.main_shift && !this.double_shift) {      
+      
       this.total_hours = this.main_shift.shift_hours
       
       if (this.total_hours >= OT_LIMIT_HOURS) {
+        
         this.overtime_hours = this.total_hours - OT_LIMIT_HOURS
-        this.regular_hours = OT_LIMIT_HOURS
+        this.regular_hours  = OT_LIMIT_HOURS
       }
       else if (this.total_hours < OT_LIMIT_HOURS) {
+      
         this.overtime_hours = 0
-        this.regular_hours = this.total_hours
+        this.regular_hours  = this.total_hours
       }
     }
     this.regular_pay  = this.regular_hours  * PAY_RATE
