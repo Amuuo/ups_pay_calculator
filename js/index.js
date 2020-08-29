@@ -13,7 +13,3 @@ register_link.id   = 'register_link'
 
 register_link.textContent  = 'Register'
 document.querySelector('footer').prepend(register_link)
-
-  
-
-
