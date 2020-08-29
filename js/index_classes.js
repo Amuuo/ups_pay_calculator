@@ -83,27 +83,6 @@ class PayReportTable {
 class Workday {
   
   payReportTable = new PayReportTable(this);
-  
-  get total_hours    () {return this._total_hours    }
-  get regular_hours  () {return this._regular_hours  }
-  get overtime_hours () {return this._overtime_hours }
-  get regular_pay    () {return this._regular_pay    }
-  get overtime_pay   () {return this._overtime_pay   }
-  get total_pay      () {return this._total_pay      }
-  get main_shift     () {return this._main_shift     }
-  get double_shift   () {return this._double_shift   }  
-  get avg_payrate    () {return this._avg_payrate    }
-
-  set total_hours    (val) {this._total_hours    = val}
-  set regular_hours  (val) {this._regular_hours  = val}
-  set overtime_hours (val) {this._overtime_hours = val}
-  set regular_pay    (val) {this._regular_pay    = val}
-  set overtime_pay   (val) {this._overtime_pay   = val}
-  set total_pay      (val) {this._total_pay      = val}
-  set main_shift     (val) {this._main_shift     = val}
-  set double_shift   (val) {this._double_shift   = val}  
-  set avg_payrate    (val) {this._avg_payrate    = val}
-
 
   resetWorkday() {
 

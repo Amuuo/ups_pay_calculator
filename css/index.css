@@ -51,9 +51,15 @@ body {
 
 }
 
+<<<<<<< HEAD
 .employee_record, .employee_record2 {
   min-width     : 50%;
   display       : grid;
+=======
+.employee_record, .employee_record2 {     
+  min-width     : 100%; 
+  display       : grid;    
+>>>>>>> 6ee1000... big changes to simplify code in index_classes, removed getters, setters, redundancy
   grid-template-columns : 1fr minmax(50%, 3fr) 1fr;
   grid-template-rows: 1fr;
   max-width: 100%;
@@ -62,6 +68,10 @@ body {
 .employee_record {
   grid-row: 2;
   max-width: auto;
+}
+
+.employee_record {
+  grid-row: 2;
 }
 
 
