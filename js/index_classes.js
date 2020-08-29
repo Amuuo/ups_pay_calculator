@@ -1,44 +1,4 @@
 
-
-let PAY_RATE = 0.0
-
-class Employee {
-
-  _firstName = ''
-  _lastName  = ''
-  _payRate   = 0.0
-  work_history = []  
-  
-  constructor(fullName = 'Enter Name Here', payRate = 0.0) {
-    this.fullName = fullName
-    this.payRate  = payRate
-  }
-
-  insertWorkday(workday) {
-
-
-    this.work_history.push(workday)
-
-    console.log('Workday inserted: ')
-    
-  }
-
-  set firstName(fName) { this._firstName = fName }
-  set lastName (lName) { this._lastName  = lName }
-  set payRate  (pRate) { this._payRate   = pRate }
-  set fullName (name)  { 
-    [this._firstName, this._lastName] = name.split(' ')
-  }
-  
-  get firstName() { return this._firstName }
-  get lastName()  { return this._lastName  }
-  get payRate()   { return this._payRate   }
-  get fullName()  { 
-    return `${this._firstName} ${this._lastName}`
-  }
-}
-
-
 class Shift {    
 
   shift_hours = 0.0
