@@ -32,6 +32,19 @@
       </div>
       <input class="shift_input_button" type="button" value="Save Shift"></input>
     </div>
+    <div class="employee_record2 blue_bubble_background">
+      <p class="inline_paragraph">Shift</p>
+      <div class="shift_input_container">
+        <div class="shift_start_container">          
+          <input id="shift_start_input" class="shift_input" type="time" value="17:00"></input>
+        </div>
+        <p>  -  </p>
+        <div class="shift_end_container">          
+          <input id="shift_end_input" class="shift_input" type="time"></input>
+        </div>
+      </div>
+      <input class="shift_input_button" type="button" value="Save Shift"></input>
+    </div>
     <table id="pay_data">
       <tr>    
         <td style="width: 30%"></td>
