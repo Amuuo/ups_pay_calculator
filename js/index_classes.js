@@ -2,6 +2,41 @@
 
 let PAY_RATE = 0.0
 
+class Employee {
+
+  _firstName = ''
+  _lastName  = ''
+  _payRate   = 0.0
+  work_history = []  
+  
+  constructor(fullName = 'Enter Name Here', payRate = 0.0) {
+    this.fullName = fullName
+    this.payRate  = payRate
+  }
+
+  insertWorkday(workday) {
+
+
+    this.work_history.push(workday)
+
+    console.log('Workday inserted: ')
+    
+  }
+
+  set firstName(fName) { this._firstName = fName }
+  set lastName (lName) { this._lastName  = lName }
+  set payRate  (pRate) { this._payRate   = pRate }
+  set fullName (name)  { 
+    [this._firstName, this._lastName] = name.split(' ')
+  }
+  
+  get firstName() { return this._firstName }
+  get lastName()  { return this._lastName  }
+  get payRate()   { return this._payRate   }
+  get fullName()  { 
+    return `${this._firstName} ${this._lastName}`
+  }
+}
 
 
 class Shift {    
@@ -97,10 +132,6 @@ class Workday {
   _total_pay      = 0.0
   _shifts         = []
 
-  constructor() {
-    
-  }
-
   get total_hours    () {return this._total_hours    }
   get regular_hours  () {return this._regular_hours  }
   get overtime_hours () {return this._overtime_hours }
@@ -115,19 +146,6 @@ class Workday {
   set regular_pay    (val) {this._regular_pay    = val}
   set overtime_pay   (val) {this._overtime_pay   = val}
   set total_pay      (val) {this._total_pay      = val}
-  set shifts         (val) {this._shifts         = val}
-
-
-  resetWorkday() {
-
-    this.total_hours    = 0.0
-    this.regular_hours  = 0.0
-    this.overtime_hours = 0.0
-    this.regular_pay    = 0.0
-    this.overtime_pay   = 0.0
-    this.total_pay      = 0.0
-    this.shifts         = []
-  }
 
   insertShiftAndCalculatePayBreakdown() {
 
