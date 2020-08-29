@@ -20,7 +20,6 @@ html {
 }
 
 body {
-  
   display         : flex;
   width           : 100%;
   min-width       : 350px;
@@ -28,6 +27,7 @@ body {
   height          : auto;
   flex-direction  : column;
   margin          : 4rem 4rem 8rem 4rem;
+  overflow: visible;
 }
 
 #Checkboxes1 {
@@ -49,15 +49,17 @@ body {
   margin-right : 1.5rem;
 }
 
-.employee_record, .employee_record2 {     
-  min-width     : 100%; 
-  display       : grid;    
+.employee_record, .employee_record2 {
+  min-width     : 50%;
+  display       : grid;
   grid-template-columns : 1fr minmax(50%, 3fr) 1fr;
   grid-template-rows: 1fr;
+  max-width: 100%;
 }
 
 .employee_record {
   grid-row: 2;
+  max-width: auto;
 }
 
 
@@ -83,14 +85,33 @@ body {
 
 .shift_input_button {
   grid-column : auto;
-  margin      : 1rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
   padding     : 0.5rem;
 }
 
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .shift_input {
-  height    : 1.5rem;
-  width     : 100%;  
-  font-size : 1.25rem;
+  
+  -webkit-animation : appear 1s ease-in;
+  -o-animation      : appear 1s ease-in;
+  
+  animation  : appear 1s ease-in;
+  height     : 1.5rem;
+  width      : 72%;
+  font-size  : 1.25rem;
+  max-width  : 9rem;
+  text-align : center;
 }
 
 #second_shift_button {
@@ -126,8 +147,7 @@ body {
 }
 
 .identifier {
-  
-  height           : 2rem; 
+  height           : 2rem;
   width            : -webkit-fill-available;
   width            : -moz-available;
   padding          : 1rem;
@@ -135,13 +155,14 @@ body {
   place-self       : center;
   grid-column      : 1;
   justify-content  : flex-end;
-  align-items      : center;  
+  align-items      : center;
   background-color : var(--ups-blue);
 }
 
 #logo {
   place-self    : center;
   width         : 8rem;
+  /* [disabled]height: 100%; */
   
 }
 
@@ -261,6 +282,8 @@ header {
   display: flex;
   justify-content: center;
   padding: 2rem 0 2rem 0;
+  width: auto;
+  height: 20rem;
 }
 
 #footer {
