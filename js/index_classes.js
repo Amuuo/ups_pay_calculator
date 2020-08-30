@@ -13,8 +13,8 @@ class Shift {
   constructor(parent_workday) {
     
     this.parent_workday     = parent_workday                                    
-    this.shift_start_input = document.querySelector('#shift_start_input')
-    this.shift_end_input   = document.querySelector('#shift_end_input')
+    this.shift_start_input = document.querySelector('#main_shift_start_input')
+    this.shift_end_input   = document.querySelector('#main_shift_end_input')
     this.shift_pay_rate    = document.querySelector('#hourly_rate_input')
 
     const updateShift = () => {
