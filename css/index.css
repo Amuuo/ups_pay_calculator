@@ -5,7 +5,7 @@
 }
 
 html {
-  min-width: 26.25rem;
+  min-width: 24rem;
   display: flex;
   justify-content: center;
   height: 100%;
@@ -20,7 +20,7 @@ html {
 
 body {
   width: 100%;
-  min-width: 400px;
+  min-width: 350px;
   max-width: 700px;
   height: auto;
   margin: 4rem 0.5rem 8rem;
@@ -38,7 +38,7 @@ body {
 }
 
 .blue_bubble_background {
-  border-style: outset;
+  border-style: groove;
   background-color: gainsboro;
   border-radius: 0.25rem;
 }
@@ -178,16 +178,15 @@ main {
 }
 
 #pay_data {
-  padding: 0.25rem !important;
   color: whitesmoke;
   height: auto;
   width: 100%;
-  max-width: 550px;
   align-items: center;
   place-self: center;
-  border: 0.2rem solid white;
+  border-width: 0.2rem;
+  border-style: ridge !important;
+  border-color: #85b9eb;
   background-color: var(--ups-blue);
-box-shadow: 0.25rem 0.2rem 0.5rem rgba(25, 25, 25, 0.3);
   border-collapse: collapse;
   box-sizing: border-box;
 }
@@ -211,7 +210,6 @@ box-shadow: 0.25rem 0.2rem 0.5rem rgba(25, 25, 25, 0.3);
 
 table {
   width: 100%;
-box-shadow: 0.25rem 0.2rem 0.5rem rgba(25, 25, 25, 0.3);
 }
 
 tbody tr:hover {
@@ -334,5 +332,5 @@ div {
 }
 
 #avg_payrate {
-  column-span: 2;
 }
+

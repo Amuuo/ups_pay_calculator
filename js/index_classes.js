@@ -12,14 +12,14 @@ class Shift {
   
   constructor(parent_workday) {
     
-    this.parent_workday     = parent_workday                                    
+    this.parent_workday    = parent_workday                                    
     this.shift_start_input = document.querySelector('#main_shift_start_input')
     this.shift_end_input   = document.querySelector('#main_shift_end_input')
     this.shift_pay_rate    = document.querySelector('#hourly_rate_input')
 
     const updateShift = () => {
      
-      PAY_RATE = parseFloat(this.shift_pay_rate.value)
+      parent_workday.pay_rate = parseFloat(this.shift_pay_rate.value)
 
       this.shift_start = this.shift_start_input .value.split(':')
       this.shift_end   = this.shift_end_input   .value.split(':')
@@ -30,22 +30,17 @@ class Shift {
                           parseFloat(this.shift_end[1])/60.0
       
       
-      if (end_time > start_time)
-        this.shift_hours = (end_time - start_time)
-      
-      else if (start_time > end_time)
-        this.shift_hours = ((end_time + 24) - start_time)
-      
-      else if (start_time == end_time)
-        alert('Start time cannot equal end time')
+      if      (end_time   >  start_time) this.shift_hours = ( end_time       - start_time)      
+      else if (start_time >  end_time  ) this.shift_hours = ((end_time + 24) - start_time)      
+      else if (start_time == end_time  ) alert('Start time cannot equal end time')
 
       console.log(this);
       this.parent_workday.updateShifts()      
     }
 
-    this.shift_start_input .addEventListener('keyup', updateShift)
-    this.shift_end_input   .addEventListener('keyup', updateShift)
-    this.shift_pay_rate    .addEventListener('keyup', updateShift)
+    this.shift_start_input .addEventListener('change', updateShift)
+    this.shift_end_input   .addEventListener('change', updateShift)
+    this.shift_pay_rate    .addEventListener('change', updateShift)
   }
 }
 
@@ -54,7 +49,7 @@ class PayReportTable {
   
   constructor(parent_workday) {
     
-    this.parent_workday       = parent_workday;    
+    this.parent_workday      = parent_workday;    
     this.regular_hours_cell  = document.querySelector('#reg_hours')    
     this.regular_pay_cell    = document.querySelector('#reg_pay')    
     this.overtime_hours_cell = document.querySelector('#ot_hours')    
@@ -94,11 +89,12 @@ class Workday {
     this.main_shift     = null;
     this.double_shift   = null;
     this.total_pay      = 0.0
+    this.pay_rate       = 0.0;
   }
 
   updateShifts() {
 
-    if (this.main_shift == null) this.main_shift = MAIN_SHIFT;
+    if (this.main_shift == null) this.main_shift = new Shift(this);
     
     if (this.main_shift && this.double_shift) {    
       this._total_hours = this.main_shift.shift_hours + this.double_shift.shift_hours
