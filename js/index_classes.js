@@ -6,41 +6,34 @@ let PAY_RATE = 0.0
 
 class Shift {    
 
-  shift_hours = 0.0
-  shift_start = ''
-  shift_end   = ''
-  
-  constructor(parent_workday) {
+  static parseTimeArray = function(shift_time) {
+      
+    return (parseFloat(shift_time[0]) + parseFloat(shift_time[1])/60.0)
+  }
+
+  static updateShift = function() {
+       
+    let start_time = parseTimeArray(this.shift_start_input .value.split(':'))
+    let end_time   = parseTimeArray(this.shift_end_input   .value.split(':'))                        
     
-    this.parent_workday    = parent_workday                                    
-    this.shift_start_input = document.querySelector('#main_shift_start_input')
-    this.shift_end_input   = document.querySelector('#main_shift_end_input')
-    this.shift_pay_rate    = document.querySelector('#hourly_rate_input')
+    if      (end_time   >  start_time) this.shift_hours = ( end_time       - start_time)      
+    else if (start_time >  end_time  ) this.shift_hours = ((end_time + 24) - start_time)      
+    else if (start_time == end_time  ) alert('Start time cannot equal end time')
 
-    const updateShift = () => {
-     
-      parent_workday.pay_rate = parseFloat(this.shift_pay_rate.value)
+    this.parent_workday.updateShifts()      
+  }
 
-      this.shift_start = this.shift_start_input .value.split(':')
-      this.shift_end   = this.shift_end_input   .value.split(':')
-      
-      let start_time = parseFloat(this.shift_start[0]) + 
-                          parseFloat(this.shift_start[1])/60.0
-      let end_time   = parseFloat(this.shift_end[0])   + 
-                          parseFloat(this.shift_end[1])/60.0
-      
-      
-      if      (end_time   >  start_time) this.shift_hours = ( end_time       - start_time)      
-      else if (start_time >  end_time  ) this.shift_hours = ((end_time + 24) - start_time)      
-      else if (start_time == end_time  ) alert('Start time cannot equal end time')
 
-      console.log(this);
-      this.parent_workday.updateShifts()      
-    }
 
-    this.shift_start_input .addEventListener('change', updateShift)
-    this.shift_end_input   .addEventListener('change', updateShift)
-    this.shift_pay_rate    .addEventListener('change', updateShift)
+  constructor(parent_workday, start_input_id, end_input_id) {
+    
+    this.parent_workday     = parent_workday                                    
+    this.shift_start_input  = document.querySelector(start_input_id)
+    this.shift_end_input    = document.querySelector(end_input_id)
+    
+    
+    this.shift_start_input .addEventListener('change', this.updateShift)
+    this.shift_end_input   .addEventListener('change', this.updateShift)    
   }
 }
 
@@ -86,30 +79,35 @@ class Workday {
     this.overtime_hours = 0.0
     this.regular_pay    = 0.0
     this.overtime_pay   = 0.0
-    this.main_shift     = null;
-    this.double_shift   = null;
-    this.total_pay      = 0.0
-    this.pay_rate       = 0.0;
+    this.total_pay      = 0.0    
+  }
+
+  constructor() {
+    
+    this.main_shift      = new Shift(this, '#main_shift_start_input'  , '#main_shift_end_input')
+    this.double_shift    = new Shift(this, '#double_shift_start_input', '#double_shift_start_input')    
+    this.pay_rate_input  = document.querySelector('#hourly_rate_input')
+    
+    this.pay_rate_input.addEventListener('change', Shift.updateShift)
   }
 
   updateShifts() {
 
-    if (this.main_shift == null) this.main_shift = new Shift(this);
-    
-    if (this.main_shift && this.double_shift) {    
-      this._total_hours = this.main_shift.shift_hours + this.double_shift.shift_hours
+    if ((this.main_shift.shift_hours != 0) && 
+        (this.double_shift.shift_hours != 0)) {    
+      this.total_hours = this.main_shift.shift_hours + this.double_shift.shift_hours
       
       if (this.total_hours > 8) {      
         this.overtime_hours = this.total_hours - 8
         this.regular_hours = 8
       }
       else {
-      
         this.overtime_hours = 0
         this.regular_hours = this.total_hours
       }
     }
-    else if (this.main_shift && !this.double_shift) {      
+    else if ((this.main_shift.total_hours != 0) && 
+              (this.double_shift.total_hours == 0)) {      
       this.total_hours = this.main_shift.shift_hours
       
       if (this.total_hours >= OT_LIMIT_HOURS) {
@@ -121,10 +119,10 @@ class Workday {
         this.regular_hours = this.total_hours
       }
     }
-    this.regular_pay  = this.regular_hours  * PAY_RATE
-    this.overtime_pay = this.overtime_hours * (PAY_RATE * 1.5)
-    this.total_pay    = this.regular_pay    + this.overtime_pay
-    this.avg_payrate  = this.total_pay      / this.total_hours
+    this.regular_pay  = this.regular_hours  *  this.pay_rate_input.value
+    this.overtime_pay = this.overtime_hours * (this.pay_rate_input.value * 1.5)
+    this.total_pay    = this.regular_pay    +  this.overtime_pay
+    this.avg_payrate  = this.total_pay      /  this.total_hours
     this.payReportTable.updateTable();
     this.resetWorkday(); 
   }
