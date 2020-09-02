@@ -180,6 +180,7 @@ main {
 #pay_data {
   color: whitesmoke;
   height: auto;
+  font-size: 0.8rem;
   width: 100%;
   align-items: center;
   place-self: center;
@@ -295,8 +296,8 @@ footer {
 
 div {
   padding-bottom: 0rem !important;
-  -webkit-grid-template-columns: 4rem;
-  grid-template-columns: 4rem;
+  -webkit-grid-template-columns: 2fr 5fr;
+  grid-template-columns: 2fr 5fr;
 }
 
 .form_container {
@@ -305,12 +306,10 @@ div {
   grid-template-areas: "a b b" "a d d" "e f f" "e h h";
   -webkit-grid-template-rows: 1fr !important;
   grid-template-rows: 1fr !important;
-  -webkit-grid-template-columns: auto minmax(15%, 30%) !important;
-  grid-template-columns: auto minmax(15%, 30%) !important;
   -webkit-grid-gap: 0.5rem;
   grid-gap: 0.5rem;
-  width: 100%;
-  max-width: 34rem;
+  align-self: center;
+  flex-direction: column;
 }
 
 .hourly_rate_container {
@@ -332,5 +331,22 @@ div {
 }
 
 #avg_payrate {
+}
+
+.buttons_container {
+  height: 2.5rem;
+  display: flex;
+}
+
+#load_shift_button {
+  width: 50%;
+}
+
+#sav_shift_button {
+  width: 50%;
+}
+
+#save_shift_button {
+  width: 50%;
 }
 

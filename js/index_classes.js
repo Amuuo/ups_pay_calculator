@@ -1,44 +1,13 @@
 
-
-class Shift {    
-
-  shift_hours = 0.0
-
-  static parseTimeArray = function(shift_time) {
-      
-    return (parseFloat(shift_time[0]) + parseFloat(shift_time[1])/60.0)
-  }
-
-
-  constructor(parent_workday, start_input_id, end_input_id) {
-    
-    this.parent_workday     = parent_workday                                    
-    this.shift_start_input  = document.querySelector(start_input_id)
-    this.shift_end_input    = document.querySelector(end_input_id)
-    
-    if (this.parent_workday.pay_rate_input == null)
-      this.parent_workday.pay_rate_input  = document.querySelector('#hourly_rate_input')
-    
-    
-    const updateShift = () => {
-      
-      let start_time = Shift.parseTimeArray(this.shift_start_input .value.split(':'))
-      let end_time   = Shift.parseTimeArray(this.shift_end_input   .value.split(':'))                        
-      
-      if      (end_time   >  start_time) this.shift_hours = ( end_time       - start_time)      
-      else if (start_time >  end_time  ) this.shift_hours = ((end_time + 24) - start_time)      
-      else if (start_time == end_time  ) alert('Start time cannot equal end time')
-      
-      this.parent_workday.updateShifts()      
-    }
-    
-    
-    this.shift_start_input             .addEventListener('change', updateShift)
-    this.shift_end_input               .addEventListener('change', updateShift)    
-    this.parent_workday.pay_rate_input      .addEventListener('change', updateShift)
-  }
-}
-
+// -----------------------------------------------------------------------------
+//
+//  PAYREPORTTABLE - CLASS
+//
+//  Class to store all data from Pay Report Table, linking to the appropiate
+//  table cells during construction. parent_workday calls updateTable() every-
+//  time any of the form inputs are changed
+//
+// -----------------------------------------------------------------------------
 
 class PayReportTable {    
   
@@ -70,21 +39,84 @@ class PayReportTable {
 }
 
 
+
+
+
+// -----------------------------------------------------------------------------
+//
+//  PAYREPORTTABLE - CLASS
+//
+//  Class to store all data from Pay Report Table, linking to the appropiate
+//  table cells during construction. parent_workday calls updateTable() every-
+//  time any of the form inputs are changed
+//
+// -----------------------------------------------------------------------------
+
+class Shift {    
+
+  shift_hours = 0.0
+
+  parseTimeArray(shift_time) {
+      
+    return (parseFloat(shift_time[0]) + parseFloat(shift_time[1])/60.0)
+  }
+
+  constructor(parent_workday, start_input_id, end_input_id) {
+    
+    this.parent_workday     = parent_workday                                    
+    this.shift_start_input  = document.querySelector(start_input_id)
+    this.shift_end_input    = document.querySelector(end_input_id)
+    
+    if (parent_workday.pay_rate_input == null)
+      parent_workday.pay_rate_input  = document.querySelector('#hourly_rate_input')
+    
+    // -------------------------------------------------------------------------
+    //  updateShift function: called by html form inputs on a change 
+    // -------------------------------------------------------------------------
+    
+    const updateShift = () => {
+      
+      let start_time = parseTimeArray(this.shift_start_input .value.split(':'))
+      let end_time   = parseTimeArray(this.shift_end_input   .value.split(':'))                        
+      
+      if      (end_time   >  start_time) this.shift_hours = ( end_time       - start_time)      
+      else if (start_time >  end_time  ) this.shift_hours = ((end_time + 24) - start_time)      
+      else if (start_time == end_time  ) alert('Start time cannot equal end time')
+      
+      parent_workday.updateWorkdayStats()      
+    }
+    //--------------------------------------------------------------------------
+    
+    this.shift_start_input        .addEventListener('change', updateShift)
+    this.shift_end_input          .addEventListener('change', updateShift)    
+    parent_workday.pay_rate_input .addEventListener('change', updateShift)
+  }
+}
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------------
+//
+//  PAYREPORTTABLE - CLASS
+//
+//  Class to store all data from Pay Report Table, linking to the appropiate
+//  table cells during construction. parent_workday calls updateTable() every-
+//  time any of the form inputs are changed
+//
+// -----------------------------------------------------------------------------
+
 class Workday {
   
   payReportTable = new PayReportTable(this);
 
-  resetWorkday() {
-
-    this.total_hours    = 0.0
-    this.regular_hours  = 0.0
-    this.overtime_hours = 0.0
-    this.regular_pay    = 0.0
-    this.overtime_pay   = 0.0
-    this.total_pay      = 0.0    
-  }
 
   constructor() {
+
     this.pay_rate_input  = null
     this.main_shift      = new Shift(this, '#main_shift_start_input'  , '#main_shift_end_input')
     this.double_shift    = new Shift(this, '#double_shift_start_input', '#double_shift_end_input')    
@@ -92,15 +124,17 @@ class Workday {
   }
 
   calculateDayPay() {
+
     this.regular_pay  = this.regular_hours  *  this.pay_rate_input.value
     this.overtime_pay = this.overtime_hours * (this.pay_rate_input.value * 1.5)
     this.total_pay    = this.regular_pay    +  this.overtime_pay
     this.avg_payrate  = this.total_pay      /  this.total_hours
-    this.payReportTable.updateTable();
-    this.resetWorkday(); 
+    
+    this.payReportTable.updateTable(); 
   }
 
-  updateShifts() {
+
+  updateWorkdayStats() {
 
     if ((this.main_shift.shift_hours != 0) && 
         (this.double_shift.shift_hours != 0)) {    
@@ -128,8 +162,8 @@ class Workday {
         this.overtime_hours = 0
         this.regular_hours = this.total_hours
       }
-      this.double_shift.shift_start_input.setAttribute('disabled', 'enabled')
-      this.double_shift.shift_end_input.setAttribute('disabled', 'enabled')
+      this.double_shift.shift_start_input.disabled = false
+      this.double_shift.shift_end_input  .disabled = false
       this.calculateDayPay()
     }
     

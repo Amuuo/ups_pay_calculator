@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+
       
   <link rel="stylesheet" href="css/index.css">
 </head>
@@ -45,29 +46,34 @@
       </tbody>
     </table>
 
-    <div class="form_container" style="grid-template-columns: 2fr 5fr !important;">
+    <div class="form_container">
       <div class="hourly_rate_container blue_bubble_background" style="grid-area: a / a / a / a;">
-        <p class="inline_paragraph">Hourly Rate</p>
+        <p class="inline_paragraph">Hourly Rate ($)</p>
         <input id="hourly_rate_input" value="14.50" min="0.00" max="10000.00" step="any" type="number"> 
       </div>
       <div class="employee_record blue_bubble_background" style="grid-area: b / b / b / b;">
         <p class="inline_paragraph">Main Shift</p>
         <div class="shift_input_container"> 
           <input id="main_shift_start_input" class="shift_input" type="time">                  
-          <input id="main_shift_end_input"   class="shift_input" type="time"> 
+          <input id="main_shift_end_input" class="shift_input" type="time"> 
         </div>
       </div>
       <div class="employee_record blue_bubble_background" style="grid-area: d / d / d / d;">
         <p class="inline_paragraph">Double Shift</p>
         <div class="shift_input_container"> 
-          <input id="double_shift_start_input" class="shift_input" type="time" disabled="disabled">
-          <input id="double_shift_end_input"  class="shift_input" type="time" disabled="disabled"> 
+          <input id="double_shift_start_input" class="shift_input" disabled="disabled" type="time">
+          <input id="double_shift_end_input" class="shift_input" disabled="disabled" type="time"> 
         </div>
       </div> 
+    </div>
+    <div class="buttons_container">
+      <input id="load_shift_button" value="Load Shift" style="grid-column: 2 / auto;" type="button">
+      <input id="save_shift_button" value="Save Shift" style="grid-column: 3 / auto;" disabled="disabled" type="button">      
     </div>
   </main>
   <footer>
     <div id="footer">
+      <a href="./register.php" id="register_link">Register</a>
       <p>Adam Williams ? 2020</p>
     </div>
   </footer>
