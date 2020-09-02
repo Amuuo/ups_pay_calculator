@@ -44,7 +44,7 @@ class PayReportTable {
 
 // -----------------------------------------------------------------------------
 //
-//  PAYREPORTTABLE - CLASS
+//  SHIFT - CLASS
 //
 //  Class to store all data from Pay Report Table, linking to the appropiate
 //  table cells during construction. parent_workday calls updateTable() every-
@@ -56,7 +56,7 @@ class Shift {
 
   shift_hours = 0.0
 
-  parseTimeArray(shift_time) {
+  parseTimeArray = shift_time => {
       
     return (parseFloat(shift_time[0]) + parseFloat(shift_time[1])/60.0)
   }
@@ -76,8 +76,8 @@ class Shift {
     
     const updateShift = () => {
       
-      let start_time = parseTimeArray(this.shift_start_input .value.split(':'))
-      let end_time   = parseTimeArray(this.shift_end_input   .value.split(':'))                        
+      let start_time = this.parseTimeArray(this.shift_start_input .value.split(':'))
+      let end_time   = this.parseTimeArray(this.shift_end_input   .value.split(':'))                        
       
       if      (end_time   >  start_time) this.shift_hours = ( end_time       - start_time)      
       else if (start_time >  end_time  ) this.shift_hours = ((end_time + 24) - start_time)      
